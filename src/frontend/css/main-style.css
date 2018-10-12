@@ -1,0 +1,22 @@
+
+
+@media (min-width: 992px) {
+  
+}
+
+.business-header {
+  height: 50vh;
+  min-height: 300px;
+  background: url(../img/books.jpg) center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.shadowed-text{
+	text-shadow: 2px 4px 9px black;
+}
+
