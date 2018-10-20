@@ -20,7 +20,7 @@
 
   object-fit: fill;
   position: absolute;
-   
+  box-shadow: 6px -1px 5px 0px rgba(0,0,0,0.75); 
   top: 50px; 
   left: 14%;
   width: 180px; 
@@ -41,6 +41,11 @@
   left: 4%;
   width: 40px;
   height: 40px;
+}
+
+.stars{
+  margin-top:0px;
+  width: 100px;
 }
 
 .book-characteristics{
