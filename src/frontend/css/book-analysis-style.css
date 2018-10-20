@@ -1,0 +1,58 @@
+
+@media (min-width: 992px) {
+  
+}
+
+.business-header {
+  height: 30vh;
+  height: 150px;
+  position: relative;
+  background: url(../img/books.jpg)  no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.book-image-block{
+
+  object-fit: fill;
+  position: absolute;
+   
+  top: 50px; 
+  left: 14%;
+  width: 180px; 
+  height: 252px; 
+
+}
+
+.ngram-image-block{
+  margin-top: 50px;
+  margin-left: 500px;
+  width: 660px; 
+  height: 220px;
+}
+
+.arrow{
+  position: absolute;
+  top: 550px;
+  left: 4%;
+  width: 40px;
+  height: 40px;
+}
+
+.book-characteristics{
+  
+  position: absolute;
+  top: 350px;
+  left: 12%;
+  font-size: 20px;
+}
+
+.shadowed-text{
+	text-shadow: 2px 4px 9px black;
+}
+
+
