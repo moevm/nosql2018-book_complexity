@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Books complexity online</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/search-result-style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    
+    <div class="outerNFB">
+      <div id="nothingFoundBlock" class="notFoundLabel">Sorry...no books found</div>
+    </div>
+    <!-- Page Content -->
+    <div class="container">
+            <!--<button onclick="addFoundBook('The name of the book','Author of the book','5')">Click me</button>  -->
+        <div id="insertedFoundBooks"></div>
+        <a href="../index.html"><img class="arrow" src="../img/arrow.png" alt="arrow image" ></a>
+    </div>
+     
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function addFoundBook(title, author, difficulty) {
+            var block_to_insert ;
+            var container_block ;
+            var nothing_found_block ;
+
+            nothing_found_block = document.getElementById('nothingFoundBlock');
+            nothing_found_block.style.display = 'none';
+            
+
+            block_to_insert = document.createElement( 'div' );
+            block_to_insert.className = 'bookEntity';
+            block_to_insert.innerHTML = '<form action="book-analysis.html" method="GET">' 
+                  + title + ',&nbsp;&nbsp;&nbsp;' 
+                  + author + '&nbsp;&nbsp;(<i>dificulty = ' 
+                  + difficulty + '</i>)'
+                  +'</form>';
+            
+
+            container_block = document.getElementById( 'insertedFoundBooks' );
+            container_block.appendChild( block_to_insert );
+            
+        }
+            
+    </script>
+  </body>
+
+
+</html>
