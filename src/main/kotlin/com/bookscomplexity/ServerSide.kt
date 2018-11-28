@@ -24,13 +24,13 @@ class ServerSide private constructor() {
         val instance: ServerSide by lazy { Holder.INSTANCE }
     }
 
-    fun insertToDB() {
+    fun insertDocument() {
 
     }
 
-    fun getLastRecord() {
+    fun findDocument() {
 
     }
 
-    
+
 }
