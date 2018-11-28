@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Books complexity online</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main-style.css" rel="stylesheet">
+    <link href="css/drop-file.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    
+
+    <!-- Header with Background Image -->
+    <header class="business-header">
+     	<div class="container">
+	        <div class="row">
+	        	<div class="col-md-10 col-lg-9 col-xl-8 mx-auto text-white text-center shadowed-text">
+	            	<h1 class="mb-5">Find the book in our database:</h1>
+	        	</div>
+	        </div>
+	        <div class="col-md-10 col-lg-9 col-xl-8 mx-auto">
+	            <form method="GET">
+	              	<div class="form-row">
+		                <div class="col-9">
+		                  <input class="form-control form-control-md" name="searchedBook" placeholder="Enter the name of the book ...">
+		                </div>
+		                <div class="col-3">
+		                  <button type="submit" class="btn btn-block btn-md btn-primary"><b>search</b></button>
+		                </div>
+	              	</div>
+	            </form>
+	              	<div class="form-row">
+	              		<div class="col-9"></div>
+	              		<div class="col-3" ><a href="#" class="btn btn-md btn-link btn-block text-white shadowed-text">or show all</a></div>
+	            	</div>
+	        </div>
+       	</div>
+      
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div id="drop-area">
+        <form class="my-form">
+          <div>Upload your book for analysis (txt/epub/fb2)</div><br>
+          <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+          <label class="button" for="fileElem" class="select-button">Select from file</label>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/drop-scripts.js"></script>
+
+  </body>
+
+</html>
