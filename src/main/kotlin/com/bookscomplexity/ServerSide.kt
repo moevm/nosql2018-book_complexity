@@ -1,6 +1,8 @@
 package com.bookscomplexity
 
 import org.litote.kmongo.KMongo
+import org.litote.kmongo.eq
+import org.litote.kmongo.findOne
 import org.litote.kmongo.getCollection
 
 data class Book (val title: String,
@@ -24,13 +26,9 @@ class ServerSide private constructor() {
         val instance: ServerSide by lazy { Holder.INSTANCE }
     }
 
-    fun insertDocument() {
+    fun insertBook() {
 
     }
 
-    fun findDocument() {
-
-    }
-
-
+    fun getBookFromDB(order: String): Book? = col.findOne(Book::title eq order)
 }
