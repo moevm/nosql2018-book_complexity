@@ -1,6 +1,10 @@
 package com.bookscomplexity
 
+import io.ktor.application.call
+import io.ktor.http.cio.parseRequest
 import io.ktor.http.content.*
+import io.ktor.request.receiveParameters
+import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -25,6 +29,11 @@ fun main(args: Array<String>) {
                 }
                 file("/index.html", "index.html")
                 default("index.html")
+            }
+
+            get("/") {
+                val alarm = call.request.queryParameters["searchedBook"]
+                System.out.println("$alarm")
             }
         }
     }.start(wait = true)

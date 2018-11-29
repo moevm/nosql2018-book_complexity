@@ -30,5 +30,5 @@ class ServerSide private constructor() {
 
     }
 
-    fun getBookFromDB(order: String): Book? = col.findOne(Book::title eq order)
+    fun getBookFromDB(order: String) = col.findOne(Book::title eq order)
 }
