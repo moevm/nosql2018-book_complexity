@@ -47,13 +47,12 @@
 
         block_to_insert = document.createElement( 'div' );
         block_to_insert.className = 'bookEntity';
-        block_to_insert.innerHTML = '<form action="book-analysis.html" method="GET" id="form-id">'
-              // + '<input type="button" value="mybutton1" id="your-id">' 
+        block_to_insert.innerHTML = 
+              '<a href="book-analysis.html?title='+title+'&author='+author+'">'
               + title + ',&nbsp;&nbsp;&nbsp;' 
               + author + '&nbsp;&nbsp;(<i>dificulty = ' 
               + difficulty + '</i>)'
-              
-            +'</form>';
+              + '</a>';
         
 
         container_block = document.getElementById( 'insertedFoundBooks' );
@@ -93,15 +92,6 @@
       }
      
       
-    </script>
-    <script>
-      var form = document.getElementById("form-id");
-
-      console.log("bongo"); 
-      document.getElementById("your-id").addEventListener("click", function () {
-      console.log("bingo"); 
-      form.submit();
-      });
     </script>
   </body>
 
