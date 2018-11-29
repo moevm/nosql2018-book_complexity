@@ -1,16 +1,20 @@
 package com.bookscomplexity
 
 import io.ktor.application.call
-import io.ktor.http.cio.parseRequest
+import io.ktor.http.ContentType
 import io.ktor.http.content.*
 import io.ktor.request.receiveParameters
-import io.ktor.routing.get
+import io.ktor.response.respondText
+import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import java.io.File
 
 fun main(args: Array<String>) {
+
+    val backend = ServerSide.instance
+
     val server = embeddedServer(Netty, port = 8080) {
         routing {
             static("/") {
@@ -31,9 +35,13 @@ fun main(args: Array<String>) {
                 default("index.html")
             }
 
-            get("/") {
-                val alarm = call.request.queryParameters["searchedBook"]
-                System.out.println("$alarm")
+            post("/SearchResultServlet") {
+                val searchedBook = call.receiveParameters()["searchedBook"]
+
+                if (searchedBook != null) {
+                    val book = backend.getBooksFromDB(searchedBook)
+                    call.respondText(book, ContentType.Application.Json)
+                }
             }
         }
     }.start(wait = true)

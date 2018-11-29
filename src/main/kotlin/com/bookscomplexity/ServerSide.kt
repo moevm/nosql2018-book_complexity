@@ -1,9 +1,9 @@
 package com.bookscomplexity
 
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.eq
-import org.litote.kmongo.findOne
-import org.litote.kmongo.getCollection
+import com.google.gson.Gson
+import org.litote.kmongo.*
+
+data class Books (val Books: MutableList<Book>)
 
 data class Book (val title: String,
                  val author: String,
@@ -18,7 +18,8 @@ class ServerSide private constructor() {
 
     private val client = KMongo.createClient()
     private val database = client.getDatabase("nosql")
-    private val col = database.getCollection<Book>()
+    private val col = database.getCollection<Book>("books_stats")
+
 
     private object Holder { val INSTANCE = ServerSide() }
 
@@ -30,5 +31,13 @@ class ServerSide private constructor() {
 
     }
 
-    fun getBookFromDB(order: String) = col.findOne(Book::title eq order)
+    fun getBooksFromDB(order: String): String {
+        col.createIndex("{ title: \"text\", author: \"text\" }")
+        val books = col.find(" { \$text: { \$search: \"$order\" } }")
+
+        val result = mutableListOf<Book>()
+        result.addAll(books)
+
+        return Gson().toJson(result)
+    }
 }

@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="794caa4c-12c6-4e79-9425-a5c3bc4ea2c4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/html/search-results.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/html/search-results.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" afterDir="false" />
     </list>
@@ -77,40 +79,40 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="6" />
+          <entry key="class" value="10" />
           <entry key="css" value="5" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="9" />
+          <entry key="html" value="10" />
           <entry key="iml" value="1" />
           <entry key="kt" value="9" />
           <entry key="md" value="1" />
-          <entry key="xml" value="12" />
+          <entry key="xml" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="6" />
+          <entry key="CLASS" value="10" />
           <entry key="CSS" value="5" />
-          <entry key="HTML" value="9" />
+          <entry key="HTML" value="10" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Kotlin" value="9" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="XML" value="12" />
+          <entry key="XML" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="29" />
-          <entry key="kt" value="1924" />
-          <entry key="xml" value="18" />
+          <entry key="html" value="50" />
+          <entry key="kt" value="3013" />
+          <entry key="xml" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="29" />
-          <entry key="Kotlin" value="1924" />
-          <entry key="XML" value="18" />
+          <entry key="HTML" value="50" />
+          <entry key="Kotlin" value="3013" />
+          <entry key="XML" value="19" />
         </counts>
       </usages-collector>
     </session>
@@ -120,17 +122,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frontend/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-69">
-              <caret line="36" column="88" selection-start-line="36" selection-start-column="76" selection-end-line="36" selection-end-column="88" />
+            <state relative-caret-position="303">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#30#289#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,8 +134,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="211">
+              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+              <folding>
+                <element signature="e#29#83#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/frontend/html/book-analysis.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -147,13 +155,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/frontend/html/search-results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-828">
+            <state relative-caret-position="253">
+              <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="34" />
               <folding>
-                <element signature="e#48#54#0" expanded="true" />
-                <element signature="e#54#60#0" expanded="true" />
-                <element signature="e#60#66#0" expanded="true" />
-                <element signature="e#66#72#0" expanded="true" />
-                <element signature="e#72#78#0" expanded="true" />
+                <element signature="e#61#67#0" expanded="true" />
+                <element signature="e#67#73#0" expanded="true" />
+                <element signature="e#73#79#0" expanded="true" />
+                <element signature="e#79#85#0" expanded="true" />
+                <element signature="e#85#91#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,6 +180,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>1.6</find>
+      <find>sorr</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -196,11 +206,12 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Hello.kt" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/frontend/Main.kt" />
         <option value="$PROJECT_DIR$/src/frontend/index.html" />
         <option value="$PROJECT_DIR$/src/main/frontend/html/book-analysis.html" />
         <option value="$PROJECT_DIR$/src/main/frontend/index.html" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/frontend/html/search-results.html" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" />
       </list>
@@ -321,7 +332,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543442704938" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543484007012" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Arduino" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -435,12 +446,12 @@
       <workItem from="1542798233262" duration="3086000" />
       <workItem from="1543397024809" duration="6560000" />
       <workItem from="1543427527542" duration="13681000" />
-      <workItem from="1543469209986" duration="3125000" />
+      <workItem from="1543469209986" duration="13872000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34962000" />
+    <option name="totallyTimeSpent" value="45709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="29" width="1920" height="1051" extended-state="6" />
@@ -541,27 +552,6 @@
     <entry file="file://$PROJECT_DIR$/src/frontend/css/drop-file.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/frontend/html/book-analysis.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/ktor/ktor-utils-jvm/1.0.0/ktor-utils-jvm-1.0.0.jar!/io/ktor/util/pipeline/SuspendFunctionGun.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.0.1/kotlinx-coroutines-core-1.0.1.jar!/kotlinx/coroutines/DispatchedTask.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -583,37 +573,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
+    <entry file="file://$PROJECT_DIR$/src/frontend/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="184">
+          <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/frontend/index.html">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="36" column="88" selection-start-line="36" selection-start-column="76" selection-end-line="36" selection-end-column="88" />
+        <state relative-caret-position="119">
+          <caret line="57" column="53" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/ktor/ktor-utils-jvm/1.0.0/ktor-utils-jvm-1.0.0.jar!/io/ktor/util/pipeline/Pipeline.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/ktor/ktor-server-core/1.0.0/ktor-server-core-1.0.0.jar!/io/ktor/routing/Routing.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/ktor/ktor-utils-jvm/1.0.0/ktor-utils-jvm-1.0.0.jar!/io/ktor/util/pipeline/SuspendFunctionGun.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frontend/html/book-analysis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/frontend/html/search-results.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-828">
+        <state relative-caret-position="253">
+          <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="34" />
           <folding>
-            <element signature="e#48#54#0" expanded="true" />
-            <element signature="e#54#60#0" expanded="true" />
-            <element signature="e#60#66#0" expanded="true" />
-            <element signature="e#66#72#0" expanded="true" />
-            <element signature="e#72#78#0" expanded="true" />
+            <element signature="e#61#67#0" expanded="true" />
+            <element signature="e#67#73#0" expanded="true" />
+            <element signature="e#73#79#0" expanded="true" />
+            <element signature="e#79#85#0" expanded="true" />
+            <element signature="e#85#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding>
+            <element signature="e#29#83#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="36" column="13" lean-forward="true" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        <state relative-caret-position="303">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#30#289#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -670,12 +702,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>books-complexity</last-edited>
+          <last-edited>Kotlin|books-complexity</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
