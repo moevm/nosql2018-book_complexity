@@ -17,7 +17,7 @@
     <link href="../css/search-result-style.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body onload="ajaxDataGet()">
 
     
     <div class="outerNFB">
@@ -25,7 +25,6 @@
     </div>
     <!-- Page Content -->
     <div class="container">
-            <!--<button onclick="addFoundBook('The name of the book','Author of the book','5')">Click me</button>  -->
         <div id="insertedFoundBooks"></div>
         <a href="../index.html"><img class="arrow" src="../img/arrow.png" alt="arrow image" ></a>
     </div>
@@ -36,29 +35,73 @@
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        function addFoundBook(title, author, difficulty) {
-            var block_to_insert ;
-            var container_block ;
-            var nothing_found_block ;
+      function addFoundBook(title, author, difficulty) {
+        var block_to_insert ;
+        var container_block ;
+        var nothing_found_block ;
+        
 
-            nothing_found_block = document.getElementById('nothingFoundBlock');
-            nothing_found_block.style.display = 'none';
-            
+        nothing_found_block = document.getElementById('nothingFoundBlock');
+        nothing_found_block.style.display = 'none';
+        
 
-            block_to_insert = document.createElement( 'div' );
-            block_to_insert.className = 'bookEntity';
-            block_to_insert.innerHTML = '<form action="book-analysis.html" method="GET">' 
-                  + title + ',&nbsp;&nbsp;&nbsp;' 
-                  + author + '&nbsp;&nbsp;(<i>dificulty = ' 
-                  + difficulty + '</i>)'
-                  +'</form>';
-            
+        block_to_insert = document.createElement( 'div' );
+        block_to_insert.className = 'bookEntity';
+        block_to_insert.innerHTML = '<form action="book-analysis.html" method="GET" id="form-id">'
+              // + '<input type="button" value="mybutton1" id="your-id">' 
+              + title + ',&nbsp;&nbsp;&nbsp;' 
+              + author + '&nbsp;&nbsp;(<i>dificulty = ' 
+              + difficulty + '</i>)'
+              
+            +'</form>';
+        
 
-            container_block = document.getElementById( 'insertedFoundBooks' );
-            container_block.appendChild( block_to_insert );
+        container_block = document.getElementById( 'insertedFoundBooks' );
+        container_block.appendChild( block_to_insert );
+      }
+      
+      function ajaxDataGet() {
+        var url_string = window.location.href; 
+        var url = new URL(url_string);
+        var bookName = url.searchParams.get("searchedBook");
+        
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "/SearchResultServlet", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("searchedBook=" + bookName);
+
+        
+
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var json = JSON.parse(this.responseText);
+            console.log("succsess ")
+            var data = json.Books;
+
+            for(var i in data)
+            {
+                addFoundBook(data[i].title, data[i].author, data[i].difficulty)
+            }
             
-        }
-            
+          }
+          else {
+            console.log(this.status)
+          }
+        };
+
+      }
+     
+      
+    </script>
+    <script>
+      var form = document.getElementById("form-id");
+
+      console.log("bongo"); 
+      document.getElementById("your-id").addEventListener("click", function () {
+      console.log("bingo"); 
+      form.submit();
+      });
     </script>
   </body>
 
