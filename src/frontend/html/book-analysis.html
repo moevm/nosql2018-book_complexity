@@ -17,7 +17,7 @@
     <link href="../css/book-analysis-style.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body onload="ajaxDataGet()">
 
     
 
@@ -27,17 +27,20 @@
     <!-- Page Content -->
     <div class="container">
       <img class="book-image-block" src="../img/empty-img.png">
-      <img class="ngram-image-block" src="../img/ngram-image.jpg">
+      <!-- <img class="ngram-image-block" src="../img/ngram-image.jpg"> -->
+      <div id="graphic" class="ngram-image-block"></div>
+
       <div class="book-characteristics">
-        Name: &nbsp;&nbsp; "asadsdsa"<br>
-        Author: &nbsp;&nbsp; "Autasddsaor"<br>
-        Unique words: &nbsp;&nbsp; 123123<br>
-        Number of words: &nbsp;&nbsp; 12313232<br>
-        Complexity: &nbsp;&nbsp; <img class="stars" src="../img/rating35.png"><br>
+        <div id="name"></div>
+        <div id="auth"></div>
+        <div id="uwords"></div>
+        <div id="nwords"></div>
+        <div id="complexity"></div>
+       
+        <!-- Complexity: &nbsp;&nbsp; <img class="stars" src="../img/rating35.png"><br> -->
       </div>
 
       <a href="../index.html"><img class="arrow md-10 lg-9 xl-8 mx-auto" src="../img/arrow.png" alt="arrow image"></a>
-    
     </div>
     
     
@@ -45,6 +48,69 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/plotly-latest.min.js"></script>
+    <script>
+
+      function ajaxDataGet() {
+        var url_string = window.location.href; 
+        var url = new URL(url_string);
+        var bookName = url.searchParams.get("title");
+        var bookAuthor = url.searchParams.get("chosenBookAuthor");
+        
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "/BookAnalysisServlet", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("title=" + bookName + "&author=" + bookAuthor);
+
+        
+
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var jsonData = JSON.parse(this.responseText);
+            console.log("succsess ");
+            drawGraphic(jsonData);
+          
+            document.getElementById('name').innerHTML = 'Name: &nbsp;&nbsp;"' + jsonData.title + '"<br>';
+            document.getElementById('auth').innerHTML = 'Author: &nbsp;&nbsp;"' + jsonData.author + '"<br>';
+            document.getElementById('uwords').innerHTML = 'Unique words: &nbsp;&nbsp;' + jsonData.unique_words_count + '<br>';
+            document.getElementById('nwords').innerHTML = 'Number of words: &nbsp;&nbsp;' + jsonData.words_count + '<br>';
+            document.getElementById('complexity').innerHTML = 'Complexity: &nbsp;&nbsp;' + jsonData.difficulty + '<br>';  
+            
+                        
+          }
+          else {
+            console.log(this.status)
+          }
+        };
+      }
+
+      function drawGraphic(json){
+        var json = JSON.parse("[1,0,100,234,255,123,23,1, 120]");
+        var xArr = new Array();
+        var yArr = new Array();
+
+        var arrayLength = json.length;
+        
+        for (var i = 0; i < arrayLength; i++) {
+            yArr[i] = json[i] * 100 / 255;
+            xArr[i] = 1500 + i * 10;
+        }
+
+        var trace1 = {
+        
+            y: yArr,
+            x: xArr,
+            type: 'scatter'
+        };
+
+
+        var data = [trace1];
+
+        Plotly.newPlot('graphic', data);
+      }
+      
+    </script>
 
   </body>
 
