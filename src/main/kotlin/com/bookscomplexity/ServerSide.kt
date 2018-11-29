@@ -10,7 +10,7 @@ data class Book (val title: String,
                  val words_count: Int,
                  val unique_words_count: Int,
                  val unique_stems_count: Int,
-                 val lexicon_years: Byte,
+                 val lexicon_years: ByteArray,
                  val lexicon_rarity: Double,
                  val difficulty: Double)
 
@@ -30,6 +30,12 @@ class ServerSide private constructor() {
     fun insertBook() {
 
     }
+
+    fun getBookInfo(title: String, author: String): String {
+        val info = col.findOne(Book::title eq title, Book::author eq author)
+        return Gson().toJson(info)
+    }
+           
 
     fun getBooksFromDB(order: String): String {
         col.createIndex("{ title: \"text\", author: \"text\" }")
