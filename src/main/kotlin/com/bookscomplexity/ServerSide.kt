@@ -3,8 +3,6 @@ package com.bookscomplexity
 import com.google.gson.Gson
 import org.litote.kmongo.*
 
-data class Books (val Books: MutableList<Book>)
-
 data class Book (val title: String,
                  val author: String,
                  val words_count: Int,
@@ -35,7 +33,6 @@ class ServerSide private constructor() {
         val info = col.findOne(Book::title eq title, Book::author eq author)
         return Gson().toJson(info)
     }
-           
 
     fun getBooksFromDB(order: String): String {
         col.createIndex("{ title: \"text\", author: \"text\" }")
