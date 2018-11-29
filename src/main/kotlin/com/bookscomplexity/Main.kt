@@ -43,6 +43,15 @@ fun main(args: Array<String>) {
                     call.respondText(book, ContentType.Application.Json)
                 }
             }
+            post("/BookAnalysisServlet") {
+                val bookAuthor = call.receiveParameters()["author"]
+                val bookTitle = call.receiveParameters()["title"]
+
+                if (bookAuthor != null && bookTitle != null) {
+                    val book = backend.getBookInfo(bookTitle, bookAuthor)
+                    call.respondText(book, ContentType.Application.Json)
+                }
+            }
         }
     }.start(wait = true)
 }
