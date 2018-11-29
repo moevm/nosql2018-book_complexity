@@ -75,12 +75,11 @@
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             var json = JSON.parse(this.responseText);
-            console.log("succsess ")
-            var data = json.Books;
+            console.log("succsess ");
 
-            for(var i in data)
+            for(var i in json)
             {
-                addFoundBook(data[i].title, data[i].author, data[i].difficulty)
+                addFoundBook(json[i].title, json[i].author, json[i].difficulty)
             }
             
           }
