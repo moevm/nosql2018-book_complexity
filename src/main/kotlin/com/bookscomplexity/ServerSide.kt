@@ -1,7 +1,10 @@
 package com.bookscomplexity
 
 import com.google.gson.Gson
+import com.mongodb.client.MongoCollection
+import org.bson.types.ObjectId
 import org.litote.kmongo.*
+import org.litote.kmongo.MongoOperator.*
 
 data class Book (val title: String,
                  val author: String,
@@ -11,6 +14,9 @@ data class Book (val title: String,
                  val lexicon_years: ByteArray,
                  val lexicon_rarity: Double,
                  val difficulty: Double)
+
+data class Text (val _id: ObjectId,
+                 val text: String)
 
 class ServerSide private constructor() {
 
@@ -42,5 +48,27 @@ class ServerSide private constructor() {
         result.addAll(books)
 
         return Gson().toJson(result)
+    }
+
+    fun doStemming(text: String, title: String, author: String) {
+
+        // step 1 - insert text to collection
+        val id = ObjectId()
+        val doc = Text(id, text)
+        val texts = database.getCollection<Text>("texts")
+        texts.insertOne(doc)
+
+        // step 2 - aggregate
+        aggregateTexts(texts, id)
+    }
+
+    private fun aggregateTexts(texts: MongoCollection<Text>, id: ObjectId) {
+        texts.aggregate<Any>("""[
+	        { $match: { _id: $id } },
+	        { $project: { words: { $ split: ["$ text", " "] } } },
+	        { $unwind : "$ words" },
+	        { $project: {_id: 0, w: "$ words"} },
+	        { $out : "book_splited_text" }
+            ]""".formatJson())
     }
 }

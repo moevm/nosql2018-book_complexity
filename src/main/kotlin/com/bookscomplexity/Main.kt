@@ -14,6 +14,7 @@ import java.io.File
 fun main(args: Array<String>) {
 
     val backend = ServerSide.instance
+    backend.doStemming("arthuro pendal bark mali an tudop", "alin", "gups")
 
     val server = embeddedServer(Netty, port = 8080) {
         routing {
@@ -43,6 +44,7 @@ fun main(args: Array<String>) {
                     call.respondText(book, ContentType.Application.Json)
                 }
             }
+
             post("/BookAnalysisServlet") {
                 val bookAuthor = call.receiveParameters()["author"]
                 val bookTitle = call.receiveParameters()["title"]
