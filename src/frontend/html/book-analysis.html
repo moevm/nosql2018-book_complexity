@@ -70,7 +70,7 @@
             var jsonData = JSON.parse(this.responseText);
             var dif = jsonData.difficulty 
             console.log("succsess ");
-            drawGraphic(jsonData);
+            drawGraphic(jsonData.lexicon_years);
           
             document.getElementById('name').innerHTML = 'Name: &nbsp;&nbsp;"' + jsonData.title + '"<br>';
             document.getElementById('auth').innerHTML = 'Author: &nbsp;&nbsp;"' + jsonData.author + '"<br>';
@@ -108,15 +108,20 @@
         };
       }
 
-      function drawGraphic(json){
-        var json = JSON.parse("[1,0,100,234,255,123,23,1, 120]");
+      function drawGraphic(dataArray){
         var xArr = new Array();
         var yArr = new Array();
 
-        var arrayLength = json.length;
+        var arrayLength;
         
+        if (dataArray.length > 52){
+          arrayLength = 52;
+        } else {
+          arrayLength = dataArray.length;
+        }
+
         for (var i = 0; i < arrayLength; i++) {
-            yArr[i] = json[i] * 100 / 255;
+            yArr[i] = dataArray[i] * 100 / 255;
             xArr[i] = 1500 + i * 10;
         }
 
