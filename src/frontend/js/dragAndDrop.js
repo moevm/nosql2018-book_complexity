@@ -14,7 +14,7 @@ var dropzoneConfig =
     { 
         url: "/bookUpload",
         maxFiles: "1",
-        acceptedFiles: "application/pdf,application/epub+zip,.fb2",
+        acceptedFiles: "application/pdf,application/epub+zip,.fb2,.txt",
         addRemoveLinks: "true"
     };
 var bookDropzone = new Dropzone("div#drop-zone", dropzoneConfig);
