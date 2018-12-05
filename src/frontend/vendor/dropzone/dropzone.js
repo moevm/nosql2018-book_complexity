@@ -1617,31 +1617,31 @@ var Dropzone = function (_Emitter) {
   }, {
     key: "drop",
     value: function drop(e) {
-      if (!e.dataTransfer) {
-        return;
-      }
+      // if (!e.dataTransfer) {
+      //   return;
+      // }
       this.emit("drop", e);
 
       // Convert the FileList to an Array
       // This is necessary for IE11
-      var files = [];
-      for (var i = 0; i < e.dataTransfer.files.length; i++) {
-        files[i] = e.dataTransfer.files[i];
-      }
+      // var files = [];
+      // for (var i = 0; i < e.dataTransfer.files.length; i++) {
+      //   files[i] = e.dataTransfer.files[i];
+      // }
 
-      this.emit("addedfiles", files);
+      // // this.emit("addedfiles", files);
 
-      // Even if it's a folder, files.length will contain the folders.
-      if (files.length) {
-        var items = e.dataTransfer.items;
+      // // Even if it's a folder, files.length will contain the folders.
+      // if (files.length) {
+      //   var items = e.dataTransfer.items;
 
-        if (items && items.length && items[0].webkitGetAsEntry != null) {
-          // The browser supports dropping of folders, so handle items instead of files
-          this._addFilesFromItems(items);
-        } else {
-          this.handleFiles(files);
-        }
-      }
+      //   if (items && items.length && items[0].webkitGetAsEntry != null) {
+      //     // The browser supports dropping of folders, so handle items instead of files
+      //     this._addFilesFromItems(items);
+      //   } else {
+      //     this.handleFiles(files);
+      //   }
+      // }
     }
   }, {
     key: "paste",

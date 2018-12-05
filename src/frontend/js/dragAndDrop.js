@@ -9,6 +9,7 @@ var inputedTitle;
 var inputedAuthor;
 var sendingFiles = 0;
 var flag = false;
+var dropFlag = false;
 
 // DROPZONE ==================================
 var dropzoneConfig = 
@@ -20,9 +21,15 @@ var dropzoneConfig =
     };
 var bookDropzone = new Dropzone("div#drop-zone", dropzoneConfig);
 
-Dropzone.autoDiscover = false;
 
 $(".dz-hidden-input").prop("disabled",true);
+
+bookDropzone.on("drop", function(file) {
+    dropFlag = true;
+    document.getElementById("drop-zone").click();
+    document.getElementById('dz-msg').style.display = 'none';
+
+});
 
 bookDropzone.on("addedfile", function(file) {
     document.getElementById('dz-msg').style.display = 'none'
@@ -110,5 +117,6 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
     }
     $(".dz-hidden-input").prop("disabled",false);
     flag = true;
+    dropFlag = false;
     document.getElementById("drop-zone").click();
 });
