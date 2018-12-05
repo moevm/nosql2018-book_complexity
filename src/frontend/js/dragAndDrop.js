@@ -93,7 +93,7 @@ $( "#drop-zone" ).on("drop", function(event) {
     }
 });
 
-$( "form" ).on( "submit", function( event ) {
+$( "form#infoFormId" ).on( "submit", function( event ) {
     event.preventDefault();
     inputedTitle = $("input#btId").val();
     inputedAuthor = $("input#baId").val();
