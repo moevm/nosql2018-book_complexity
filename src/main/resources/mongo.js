@@ -296,5 +296,5 @@ db.book_splited_text.drop();
 db.book_unique_words.drop();
 db.book_unique_words_with_stats.drop();
 db.book_stemmed_words.drop();
-
+db.words_stats.drop();
 id

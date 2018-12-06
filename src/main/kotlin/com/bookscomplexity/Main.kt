@@ -2,9 +2,11 @@ package com.bookscomplexity
 
 import io.ktor.application.call
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.receiveMultipart
 import io.ktor.request.receiveParameters
+import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.post
 import io.ktor.routing.routing
@@ -83,7 +85,11 @@ fun main(args: Array<String>) {
                     part.dispose()
                 }
 
-                backend.processBook(book["text"], book["title"], book["author"])
+                if (book["text"] != null && book["title"] != null && book["author"] != null) {
+                    backend.processBook(book["text"]!!, book["title"]!!, book["author"]!!)
+                }
+
+                call.respond(HttpStatusCode.Accepted)
             }
         }
     }.start(wait = true)
