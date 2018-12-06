@@ -5,6 +5,8 @@ import com.mongodb.client.MongoCollection
 import org.bson.types.ObjectId
 import org.litote.kmongo.*
 import org.litote.kmongo.MongoOperator.*
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 data class Book (val title: String,
                  val author: String,
@@ -15,8 +17,25 @@ data class Book (val title: String,
                  val lexicon_rarity: Double,
                  val difficulty: Double)
 
-data class Text (val _id: ObjectId,
+data class Text (val _id: Int,
                  val text: String)
+
+fun String.runCommand(): String? {
+    try {
+        // val parts = this.split("\\s".toRegex())
+        val parts = arrayOf("/bin/sh", "-c", this)
+        val proc = ProcessBuilder(*parts)
+                .redirectOutput(ProcessBuilder.Redirect.PIPE)
+                .redirectError(ProcessBuilder.Redirect.PIPE)
+                .start()
+
+        proc.waitFor(60, TimeUnit.MINUTES)
+        return proc.inputStream.bufferedReader().readText() + proc.errorStream.bufferedReader().readText()
+    } catch(e: IOException) {
+        e.printStackTrace()
+        return null
+    }
+}
 
 class ServerSide private constructor() {
 
@@ -31,8 +50,17 @@ class ServerSide private constructor() {
         val instance: ServerSide by lazy { Holder.INSTANCE }
     }
 
-    fun insertBook() {
+    fun processBook(text: String, title: String, author: String) {
+        val texts = database.getCollection<Text>("texts")
+        texts.insertOne(Text(0, text))
 
+        val log = "mongo < src/main/resources/mongo.js".runCommand()
+        val log_splitted = log?.split("\n")
+        val id_hash = log_splitted?.get(log_splitted.size - 3)?.substring(10, 34)
+        val id = ObjectId(id_hash)
+
+        val update = "{$set: {title: \"$title\", author: \"$author\"}}"
+        col.updateOneById(id, update)
     }
 
     fun getBookInfo(title: String, author: String): String {
@@ -48,27 +76,5 @@ class ServerSide private constructor() {
         result.addAll(books)
 
         return Gson().toJson(result)
-    }
-
-    fun doStemming(text: String, title: String, author: String) {
-
-        // step 1 - insert text to collection
-        val id = ObjectId()
-        val doc = Text(id, text)
-        val texts = database.getCollection<Text>("texts")
-        texts.insertOne(doc)
-
-        // step 2 - aggregate
-        aggregateTexts(texts, id)
-    }
-
-    private fun aggregateTexts(texts: MongoCollection<Text>, id: ObjectId) {
-        texts.aggregate<Any>("""[
-	        { $match: { _id: $id } },
-	        { $project: { words: { $ split: ["$ text", " "] } } },
-	        { $unwind : "$ words" },
-	        { $project: {_id: 0, w: "$ words"} },
-	        { $out : "book_splited_text" }
-            ]""".formatJson())
     }
 }

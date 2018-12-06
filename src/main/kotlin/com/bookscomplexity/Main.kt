@@ -82,6 +82,8 @@ fun main(args: Array<String>) {
                     }
                     part.dispose()
                 }
+
+                backend.processBook(book["text"], book["title"], book["author"])
             }
         }
     }.start(wait = true)
