@@ -1,14 +1,14 @@
 package com.bookscomplexity
 
 import com.google.gson.Gson
-import com.mongodb.client.MongoCollection
 import org.bson.types.ObjectId
 import org.litote.kmongo.*
 import org.litote.kmongo.MongoOperator.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-data class Book (val title: String,
+data class Book (val _id: ObjectId,
+                 val title: String,
                  val author: String,
                  val words_count: Int,
                  val unique_words_count: Int,
@@ -22,7 +22,6 @@ data class Text (val _id: Int,
 
 fun String.runCommand(): String? {
     try {
-        // val parts = this.split("\\s".toRegex())
         val parts = arrayOf("/bin/sh", "-c", this)
         val proc = ProcessBuilder(*parts)
                 .redirectOutput(ProcessBuilder.Redirect.PIPE)
@@ -63,18 +62,15 @@ class ServerSide private constructor() {
         col.updateOneById(id, update)
     }
 
-    fun getBookInfo(title: String, author: String): String {
-        val info = col.findOne(Book::title eq title, Book::author eq author)
-        return Gson().toJson(info)
-    }
+    fun getBookInfo(bookId: String) =
+            Gson().toJson(col.findOneById(ObjectId(bookId)))
+
 
     fun getBooksFromDB(order: String): String {
+
         col.createIndex("{ title: \"text\", author: \"text\" }")
-        val books = col.find(" { \$text: { \$search: \"$order\" } }")
+        val result = col.find(" { \$text: { \$search: \"$order\" } }")
 
-        val result = mutableListOf<Book>()
-        result.addAll(books)
-
-        return Gson().toJson(result)
+        return Gson().toJson(result.toMutableList())
     }
 }

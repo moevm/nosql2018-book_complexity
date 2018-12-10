@@ -8,6 +8,7 @@ import io.ktor.request.receiveMultipart
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.response.respondText
+import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -53,11 +54,10 @@ fun main(args: Array<String>) {
             }
 
             post("/BookAnalysisServlet") {
-                val bookAuthor = call.receiveParameters()["author"]
-                val bookTitle = call.receiveParameters()["title"]
+                val param = call.receiveParameters()["_id"]
 
-                if (bookAuthor != null && bookTitle != null) {
-                    val book = backend.getBookInfo(bookTitle, bookAuthor)
+                if (param != null) {
+                    val book = backend.getBookInfo(param)
                     call.respondText(book, ContentType.Application.Json)
                 }
             }
@@ -87,9 +87,13 @@ fun main(args: Array<String>) {
 
                 if (book["text"] != null && book["title"] != null && book["author"] != null) {
                     backend.processBook(book["text"]!!, book["title"]!!, book["author"]!!)
+                    call.respond(HttpStatusCode.Accepted)
+                }
+                else {
+                    call.respond(HttpStatusCode.NoContent)
                 }
 
-                call.respond(HttpStatusCode.Accepted)
+
             }
         }
     }.start(wait = true)
