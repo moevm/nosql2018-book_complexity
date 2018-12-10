@@ -1,5 +1,6 @@
 package com.bookscomplexity
 
+import com.kursx.parser.fb2.FictionBook
 import io.ktor.application.call
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -90,7 +91,7 @@ fun main(args: Array<String>) {
                     call.respond(HttpStatusCode.Accepted)
                 }
                 else {
-                    call.respond(HttpStatusCode.NoContent)
+                    call.respond(HttpStatusCode.NotAcceptable)
                 }
 
 
