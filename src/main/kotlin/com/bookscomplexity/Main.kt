@@ -16,6 +16,9 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import java.io.File
 import java.nio.charset.Charset
+import java.nio.file.CopyOption
+import java.nio.file.Files
+import java.nio.file.Path
 
 
 fun main(args: Array<String>) {
@@ -77,9 +80,28 @@ fun main(args: Array<String>) {
                             }
                         }
                         is PartData.FileItem -> {
+
                             if (part.originalFileName!!.endsWith("txt")) {
                                 val bytes = part.streamProvider().readBytes()
                                 book += "text" to bytes.toString(Charset.defaultCharset())
+                            }
+                            
+                            if (part.originalFileName!!.endsWith("fb2")) {
+                                val pathOfBook = Path.of("src/book.fb2")
+                                Files.copy(part.streamProvider(), pathOfBook)
+
+                                val fb2 = FictionBook(File("src/book.fb2"))
+                                Files.delete(pathOfBook)
+
+                                var result: String = ""
+
+                                for (chapter in fb2.body.sections) {
+                                    for (element in chapter.elements) {
+                                        result += element.text + " "
+                                    }
+                                }
+
+                                book += "text" to result
                             }
                         }
                     }
