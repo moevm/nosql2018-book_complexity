@@ -73,4 +73,8 @@ class ServerSide private constructor() {
 
         return Gson().toJson(result.toMutableList())
     }
+
+    fun getBooksCount() = col.countDocuments()
+
+    
 }

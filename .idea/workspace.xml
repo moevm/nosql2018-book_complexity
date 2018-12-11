@@ -6,8 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="794caa4c-12c6-4e79-9425-a5c3bc4ea2c4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -117,7 +117,7 @@
         <counts>
           <entry key="html" value="69" />
           <entry key="js" value="23" />
-          <entry key="kt" value="7769" />
+          <entry key="kt" value="7902" />
           <entry key="xml" value="19" />
         </counts>
       </usages-collector>
@@ -125,7 +125,7 @@
         <counts>
           <entry key="HTML" value="69" />
           <entry key="JavaScript" value="23" />
-          <entry key="Kotlin" value="7769" />
+          <entry key="Kotlin" value="7902" />
           <entry key="XML" value="19" />
         </counts>
       </usages-collector>
@@ -133,23 +133,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="87" column="28" lean-forward="true" selection-start-line="87" selection-start-column="28" selection-end-line="87" selection-end-column="28" />
-              <folding>
-                <element signature="e#29#615#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="230">
+              <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="215">
+              <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -209,8 +206,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/mongo.js" />
         <option value="$PROJECT_DIR$/src/frontend/html/search-results.html" />
         <option value="$PROJECT_DIR$/src/frontend/html/book-analysis.html" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" />
       </list>
     </option>
   </component>
@@ -290,7 +287,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544513509731" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544514563884" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/fb2parser.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -415,12 +412,12 @@
       <workItem from="1544005524532" duration="5092000" />
       <workItem from="1544093345066" duration="5198000" />
       <workItem from="1544460636010" duration="9057000" />
-      <workItem from="1544509940087" duration="3567000" />
+      <workItem from="1544509940087" duration="4620000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103356000" />
+    <option name="totallyTimeSpent" value="104409000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -718,20 +715,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="230">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="87" column="28" lean-forward="true" selection-start-line="87" selection-start-column="28" selection-end-line="87" selection-end-column="28" />
-          <folding>
-            <element signature="e#29#615#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="215">
+          <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
         </state>
       </provider>
     </entry>

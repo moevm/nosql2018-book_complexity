@@ -9,14 +9,12 @@ import io.ktor.request.receiveMultipart
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
 import io.ktor.response.respondText
-import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import java.io.File
 import java.nio.charset.Charset
-import java.nio.file.CopyOption
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -85,7 +83,7 @@ fun main(args: Array<String>) {
                                 val bytes = part.streamProvider().readBytes()
                                 book += "text" to bytes.toString(Charset.defaultCharset())
                             }
-                            
+
                             if (part.originalFileName!!.endsWith("fb2")) {
                                 val pathOfBook = Path.of("src/book.fb2")
                                 Files.copy(part.streamProvider(), pathOfBook)
