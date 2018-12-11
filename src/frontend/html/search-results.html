@@ -35,7 +35,7 @@
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-      function addFoundBook(title, author, difficulty) {
+      function addFoundBook(title, author, difficulty, id) {
         var block_to_insert ;
         var container_block ;
         var nothing_found_block ;
@@ -48,7 +48,7 @@
         block_to_insert = document.createElement( 'div' );
         block_to_insert.className = 'bookEntity';
         block_to_insert.innerHTML = 
-              '<a href="book-analysis.html?title='+title+'&author='+author+'">'
+              '<a href="book-analysis.html?id='+ id +'">'
               + title + ',&nbsp;&nbsp;&nbsp;' 
               + author + '&nbsp;&nbsp;(<i>dificulty = ' 
               + difficulty + '</i>)'
@@ -79,7 +79,7 @@
 
             for(var i in json)
             {
-                addFoundBook(json[i].title, json[i].author, json[i].difficulty)
+                addFoundBook(json[i].title, json[i].author, json[i].difficulty, json[i]._id)
             }
             
           }

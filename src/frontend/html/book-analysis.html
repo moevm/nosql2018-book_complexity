@@ -54,14 +54,13 @@
       function ajaxDataGet() {
         var url_string = window.location.href; 
         var url = new URL(url_string);
-        var bookName = url.searchParams.get("title");
-        var bookAuthor = url.searchParams.get("chosenBookAuthor");
+        var bookName = url.searchParams.get("id");
         
         var xhttp = new XMLHttpRequest();
 
         xhttp.open("POST", "/BookAnalysisServlet", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("title=" + bookName + "&author=" + bookAuthor);
+        xhttp.send("id=" + id);
 
         
 
