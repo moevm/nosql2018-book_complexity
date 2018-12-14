@@ -12,7 +12,7 @@
     <link href="../css/all-stats-style.css" rel="stylesheet">
 </head>
 
-<body onload="requestTopBooks();requestTopAuth()">
+<body onload="requestTopBooks();requestTopAuth();requestAvgDifficulty()">
 
     <div class="container">
         <ul class="nav justify-content-end">
@@ -27,7 +27,7 @@
           </li>
         </ul>
 
-        <div class="cont">
+        <div class="cont center-block">
           <div id="topBooksTableId">
               <table class="table">
               <thead class="thead-dark">
@@ -56,16 +56,18 @@
             </table>
           </div>
 
-          <div id="graphId"></div>
           
+          <div id="graphId" class="graphDiv"></div>
         </div>
         
         
 
     </div>
 
+
   <script src="../vendor/jquery/jquery.js"></script>
   <script src="../js/allstats.js"></script>
+  <script src="../vendor/plotly-latest.min.js"></script>
 
 </body>
 </html>
