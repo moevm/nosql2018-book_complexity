@@ -1,4 +1,4 @@
-function addFoundBook(title, author, difficulty, id, year) {
+function addFoundBook(title, author, difficulty, id, year, searchedBook) {
     
   var newRow;
   var containerBlock ;
@@ -11,7 +11,7 @@ function addFoundBook(title, author, difficulty, id, year) {
 
   newRow = document.createElement( 'tr' );
   newRow.onclick = function () {
-      window.location.href = "book-analysis.html?id=" + id;
+      window.location.href = "book-analysis.html?id=" + id + "&searchedBook=" + searchedBook;
   }
   
   containerBlock = document.getElementById( 'tBodyIdBook' );
@@ -47,7 +47,7 @@ function ajaxDataGet() {
 
       for(var i in json)
       {
-          addFoundBook(json[i].title, json[i].author, json[i].difficulty, json[i]._id, json[i].year)
+          addFoundBook(json[i].title, json[i].author, json[i].difficulty, json[i]._id, json[i].year, bookName)
       }
       
     }

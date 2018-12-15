@@ -41,8 +41,9 @@
   width: 40px;
   height: 40px;
 }
-
-
+.arrow:hover{
+  cursor: pointer;
+}
 .stars{
   margin-top:0px;
   width: 100px;

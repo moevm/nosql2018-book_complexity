@@ -1,8 +1,13 @@
-
 function ajaxDataGet() {
 var url_string = window.location.href; 
 var url = new URL(url_string);
-var bookName = url.searchParams.get("id");
+var id = url.searchParams.get("id");
+var searchedBook = url.searchParams.get("searchedBook");
+
+document.getElementById('arrowID').onclick = function(){
+    console.log("arrow");
+    window.location.href = "search-results.html?searchedBook=" + searchedBook;
+}
 
 var xhttp = new XMLHttpRequest();
 
