@@ -6,7 +6,7 @@
 .container{
   min-width: 700px;
   padding-bottom: 100px;
-  padding-top: 40px;
+  padding-top: 60px;
 }
 
 .arrow{
@@ -16,22 +16,12 @@
   width: 40px;
   height: 40px;
 }
-
-.bookEntity{
-  background-color: lightgray;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  box-shadow: 3px 0px grey;
-  margin-bottom: 4px;
-  margin-left: 60px;
+.tableRow{
+  cursor: pointer;
 }
-
-.bookEntity button {
-  float: right;
+#tdID:hover{
+  background-color: silver;
 }
-
 .outerNFB{
   width: 50%;
   height: 50%;

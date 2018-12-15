@@ -1,56 +1,60 @@
-function addFoundBook(title, author, difficulty, id) {
-    var block_to_insert ;
-    var container_block ;
-    var nothing_found_block ;
+function addFoundBook(title, author, difficulty, id, year) {
     
+  var newRow;
+  var containerBlock ;
+  var nothing_found_block ;
 
-    nothing_found_block = document.getElementById('nothingFoundBlock');
-    nothing_found_block.style.display = 'none';
     
+  nothing_found_block = document.getElementById('nothingFoundBlock');
+  nothing_found_block.style.display = 'none';
+  
 
-    block_to_insert = document.createElement( 'div' );
-    block_to_insert.className = 'bookEntity';
-    block_to_insert.innerHTML = 
-          '<a href="book-analysis.html?id='+ id +'">'
-          + title + ',&nbsp;&nbsp;&nbsp;' 
-          + author + '&nbsp;&nbsp;(<i>dificulty = ' 
-          + difficulty + '</i>)'
-          + '</a>';
-    
-
-    container_block = document.getElementById( 'insertedFoundBooks' );
-    container_block.appendChild( block_to_insert );
+  newRow = document.createElement( 'tr' );
+  newRow.onclick = function () {
+      window.location.href = "book-analysis.html?id=" + id;
   }
   
-  function ajaxDataGet() {
-    var url_string = window.location.href; 
-    var url = new URL(url_string);
-    var bookName = url.searchParams.get("searchedBook");
-    
-    var xhttp = new XMLHttpRequest();
+  containerBlock = document.getElementById( 'tBodyIdBook' );
+  newRow.className = "tableRow";
+  newRow.id = "tdID";
+  newRow.innerHTML = 
+      '<td>'+ author + '</td>'
+      + '<td>"'+ title + ' ('+ year +')'+'"</td>'
+      + '<td>'+ difficulty + '</td>'    
 
-    xhttp.open("POST", "/SearchResultServlet", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("searchedBook=" + bookName);
 
-    
+  containerBlock.appendChild( newRow );
+}
+  
+function ajaxDataGet() {
+  var url_string = window.location.href; 
+  var url = new URL(url_string);
+  var bookName = url.searchParams.get("searchedBook");
+  
+  var xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var json = JSON.parse(this.responseText);
-        console.log("succsess ");
-        console.log(json);
+  xhttp.open("POST", "/SearchResultServlet", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("searchedBook=" + bookName);
 
-        for(var i in json)
-        {
-            addFoundBook(json[i].title, json[i].author, json[i].difficulty, json[i]._id)
-        }
-        
+  
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var json = JSON.parse(this.responseText);
+      console.log("succsess");
+      console.log(json);
+
+      for(var i in json)
+      {
+          addFoundBook(json[i].title, json[i].author, json[i].difficulty, json[i]._id, json[i].year)
       }
-      else {
-        console.log(this.status)
-      }
-    };
+      
+    }
+    else {
+      console.log(this.status)
+    }
+  };
 
 }
  
