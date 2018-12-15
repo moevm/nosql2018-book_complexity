@@ -18,7 +18,7 @@ function requestTopBooks() {
             
             for(var i in jsonData)
             {
-                insertTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, "books")
+                insertTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, "books", jsonData[i].year)
             }
     
         } else {
@@ -42,7 +42,7 @@ function requestTopAuth() {
             
             for(var i in jsonData)
             {
-                insertTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, "authors")
+                insertTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, "authors", jsonData[i].year)
             }
     
         } else {
@@ -71,7 +71,7 @@ function requestAvgDifficulty() {
     }
 }
 
-function insertTableRow(title, author, difficulty, id, table) {
+function insertTableRow(title, author, difficulty, id, table, year) {
     var newRow;
     var containerBlock ;
     
@@ -90,7 +90,7 @@ function insertTableRow(title, author, difficulty, id, table) {
         newRow.innerHTML = 
               '<th scope="row">' + rowsCounterBook.toString() + '</th>'
             + '<td>'+ author + '</td>'
-            + '<td>'+ title + '</td>'
+            + '<td>"'+ title + ' ('+ year +')'+'"</td>'
             + '<td>'+ difficulty + '</td>'    
     } else {
         rowsCounterAuth++;
@@ -99,7 +99,7 @@ function insertTableRow(title, author, difficulty, id, table) {
         newRow.innerHTML = 
               '<th scope="row">' + rowsCounterAuth.toString() + '</th>'
             + '<td>'+ author + '</td>'
-            + '<td>'+ title + '</td>'
+            + '<td>"'+ title + ' ('+ year +')'+'"</td>'
             + '<td>'+ difficulty + '</td>'
     }
 
