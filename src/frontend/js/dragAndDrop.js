@@ -7,6 +7,7 @@ var span3 = document.getElementsByClassName("propmodal-close3")[0];
 var submitButton = document.getElementById('sbmt-btn');
 var inputedTitle;
 var inputedAuthor;
+var inputedYear;
 var sendingFiles = 0;
 var flag = false;
 var dropFlag = false;
@@ -48,6 +49,7 @@ bookDropzone.on("sending", function(file, xhrObj, formData) {
     flag = false;
     formData.append("bookTitle", inputedTitle);
     formData.append("bookAuthor", inputedAuthor);
+    formData.append("bookYear", inputedYear);
     
 });
 
@@ -109,7 +111,8 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
     event.preventDefault();
     inputedTitle = $("input#btId").val();
     inputedAuthor = $("input#baId").val();
-    if (!(inputedAuthor && inputedTitle)){
+    inputedYear = $("input#byId").val();
+    if (!(inputedAuthor && inputedTitle && inputedYear)){
         console.log("missing input param(s)");  
         showError("You can't pass empty author or title field");
         modal.style.display = "block";

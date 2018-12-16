@@ -29,10 +29,9 @@
 }
 
 .ngram-image-block{
-  margin-top: 50px;
   margin-left: 500px;
   width: 660px; 
-  height: 220px;
+  height: 440px;
 }
 
 .arrow{
@@ -42,8 +41,9 @@
   width: 40px;
   height: 40px;
 }
-
-
+.arrow:hover{
+  cursor: pointer;
+}
 .stars{
   margin-top:0px;
   width: 100px;
