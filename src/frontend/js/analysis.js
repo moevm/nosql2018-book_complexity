@@ -76,6 +76,8 @@ for (var i = 0; i < arrayLength; i++) {
     xArr[i] = 1500 + i * 10;
 }
 
+console.log(yArr);
+
 var trace1 = {
 
     y: yArr,
