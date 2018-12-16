@@ -5,16 +5,21 @@ import org.bson.types.ObjectId
 import org.litote.kmongo.*
 import org.litote.kmongo.MongoOperator.*
 import java.io.IOException
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 data class Book (val _id: ObjectId,
                  val title: String,
                  val author: String,
+                 val year: Date,
+
                  val words_count: Int,
                  val unique_words_count: Int,
                  val unique_stems_count: Int,
+
                  val lexicon_years: ByteArray,
                  val lexicon_rarity: Double,
+
                  val difficulty: Double)
 
 data class Text (val _id: Int,
@@ -74,7 +79,15 @@ class ServerSide private constructor() {
         return Gson().toJson(result.toMutableList())
     }
 
-    fun getBooksCount() = col.countDocuments()
+    fun getTopBooks(): String {
+        return ""
+    }
 
-    
+    fun getTopAuthors(): String {
+        return ""
+    }
+
+    fun getAvgDifficulty(): String {
+        return ""
+    }
 }

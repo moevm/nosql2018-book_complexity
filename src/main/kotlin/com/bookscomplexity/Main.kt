@@ -64,6 +64,21 @@ fun main(args: Array<String>) {
                 }
             }
 
+            post("/TopBooksServlet") {
+                val topBooks = backend.getTopBooks()
+                call.respondText(topBooks, ContentType.Application.Json)
+            }
+
+            post("/TopAuthServlet") {
+                val topAuthors = backend.getTopAuthors()
+                call.respondText(topAuthors, ContentType.Application.Json)
+            }
+
+            post("/AvgDifficultyServlet") {
+                val avgDif = backend.getAvgDifficulty()
+                call.respondText(avgDif, ContentType.Application.Json)
+            }
+
             post("/bookUpload") {
                 val multipart = call.receiveMultipart()
                 val book = mutableMapOf<String, String>()
