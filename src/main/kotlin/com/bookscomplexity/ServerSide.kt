@@ -1,6 +1,7 @@
 package com.bookscomplexity
 
 import com.google.gson.Gson
+import com.mongodb.util.JSON
 import org.bson.types.ObjectId
 import org.litote.kmongo.*
 import org.litote.kmongo.MongoOperator.*
@@ -74,20 +75,46 @@ class ServerSide private constructor() {
     fun getBooksFromDB(order: String): String {
 
         col.createIndex("{ title: \"text\", author: \"text\" }")
-        val result = col.find(" { \$text: { \$search: \"$order\" } }")
+        val result = col.find(" { \$text: { \$search: \"$order\" } }").toMutableList()
 
-        return Gson().toJson(result.toMutableList())
+        return Gson().toJson(result)
     }
 
-    fun getTopBooks(): String {
-        return ""
-    }
+    fun getTopBooks() =
+            Gson().toJson(col.find().sort("{difficulty: -1}").limit(10))
 
     fun getTopAuthors(): String {
-        return ""
+
+        val json =  """
+            [
+                {
+                    $group: {
+                        _id: "$ author",
+                        difficulty: { $avg: "$ difficulty"}
+                    }
+                },
+                { $sort: { difficulty: -1 } },
+                { $limit: 10 }
+            ]
+        """.formatJson()
+
+        val topAuthors = col.aggregate<Any>(json).toMutableList()
+        return Gson().toJson(topAuthors)
     }
 
     fun getAvgDifficulty(): String {
-        return ""
+
+        val json = """[
+            {
+                $group: {
+                    _id: {$multiply: [10, {$floor: {$divide: [{$year: "$ published"}, 10]}}]},
+                    difficulty: { $avg: "$ difficulty"}
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]"""
+
+        val avgDif = col.aggregate<Any>(json).toMutableList()
+        return Gson().toJson(avgDif)
     }
 }
