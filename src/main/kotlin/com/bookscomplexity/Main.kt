@@ -56,7 +56,7 @@ fun main(args: Array<String>) {
             }
 
             post("/BookAnalysisServlet") {
-                val param = call.receiveParameters()["_id"]
+                val param = call.receiveParameters()["id"]
 
                 if (param != null) {
                     val book = backend.getBookInfo(param)
@@ -86,14 +86,15 @@ fun main(args: Array<String>) {
                 multipart.forEachPart { part ->
                     when (part) {
                         is PartData.FormItem -> {
-                            book += if (part.name == "bookTitle") {
-                                "title" to part.value
-                            } else {
-                                "author" to part.value
-                            }
+                            book +=
+                                    when (part.name) {
+                                        "bookTitle" -> "title" to part.value
+                                        "bookAuthor" -> "author" to part.value
+                                        "bookYear" -> "year" to part.value
+                                        else -> return@forEachPart
+                                    }
                         }
                         is PartData.FileItem -> {
-
                             if (part.originalFileName!!.endsWith("txt")) {
                                 val bytes = part.streamProvider().readBytes()
                                 book += "text" to bytes.toString(Charset.defaultCharset())

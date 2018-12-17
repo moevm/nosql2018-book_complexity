@@ -1,27 +1,13 @@
 package com.bookscomplexity
 
 import com.google.gson.Gson
-import com.mongodb.util.JSON
+import org.bson.BsonDocument
 import org.bson.types.ObjectId
 import org.litote.kmongo.*
 import org.litote.kmongo.MongoOperator.*
 import java.io.IOException
-import java.util.*
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
-
-data class Book (val _id: ObjectId,
-                 val title: String,
-                 val author: String,
-                 val year: Date,
-
-                 val words_count: Int,
-                 val unique_words_count: Int,
-                 val unique_stems_count: Int,
-
-                 val lexicon_years: ByteArray,
-                 val lexicon_rarity: Double,
-
-                 val difficulty: Double)
 
 data class Text (val _id: Int,
                  val text: String)
@@ -46,7 +32,7 @@ class ServerSide private constructor() {
 
     private val client = KMongo.createClient()
     private val database = client.getDatabase("nosql")
-    private val col = database.getCollection<Book>("books_stats")
+    private val col = database.getCollection("books_stats")
 
 
     private object Holder { val INSTANCE = ServerSide() }
@@ -68,24 +54,40 @@ class ServerSide private constructor() {
         col.updateOneById(id, update)
     }
 
-    fun getBookInfo(bookId: String) =
-            Gson().toJson(col.findOneById(ObjectId(bookId)))
+    fun getBookInfo(bookId: String): String {
+        val result = col.findOneById(ObjectId(bookId))
 
-
-    fun getBooksFromDB(order: String): String {
-
-        col.createIndex("{ title: \"text\", author: \"text\" }")
-        val result = col.find(" { \$text: { \$search: \"$order\" } }").toMutableList()
+        try {
+            result!!["_id"] = result["_id"].toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         return Gson().toJson(result)
     }
 
-    fun getTopBooks() =
-            Gson().toJson(col.find().sort("{difficulty: -1}").limit(10))
+
+    fun getBooksFromDB(order: String): String {
+        col.createIndex("{ title: \"text\", author: \"text\" }")
+
+        val result = col.find(" { \$text: { \$search: \"$order\" } }")
+                .toMutableList()
+        result.forEach { it["_id"] = it["_id"].toString() }
+
+        return Gson().toJson(result)
+    }
+
+    fun getTopBooks(): String {
+        val result = col.find().sort("{difficulty: -1}").limit(10)
+                .toMutableList()
+        result.forEach { it["_id"] = it["_id"].toString() }
+        return Gson().toJson(result)
+    }
+
 
     fun getTopAuthors(): String {
 
-        val json =  """
+        val json = """
             [
                 {
                     $group: {
@@ -98,8 +100,8 @@ class ServerSide private constructor() {
             ]
         """.formatJson()
 
-        val topAuthors = col.aggregate<Any>(json).toMutableList()
-        return Gson().toJson(topAuthors)
+        val topAuthors = col.aggregate<BsonDocument>(json).toMutableList()
+        return topAuthors.toString().formatJson()
     }
 
     fun getAvgDifficulty(): String {
@@ -107,14 +109,21 @@ class ServerSide private constructor() {
         val json = """[
             {
                 $group: {
-                    _id: {$multiply: [10, {$floor: {$divide: [{$year: "$ published"}, 10]}}]},
+                    _id: {$multiply: [10, {$floor: {$divide: ["$ year", 10]}}]},
                     difficulty: { $avg: "$ difficulty"}
                 }
             },
             { $sort: { _id: 1 } }
-        ]"""
+        ]""".formatJson()
 
-        val avgDif = col.aggregate<Any>(json).toMutableList()
-        return Gson().toJson(avgDif)
+        val avgDif = col.aggregate<BsonDocument>(json).toMutableList()
+        val difficultyArray = DoubleArray(60)
+
+        avgDif.forEach {
+            val index = (it["_id"]?.asDouble()?.intValue()!! - 1500) / 60
+            difficultyArray[index] = it["difficulty"]?.asDouble()?.value!!
+        }
+
+        return Gson().toJson(difficultyArray)
     }
 }
