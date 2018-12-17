@@ -18,7 +18,7 @@ function requestTopBooks() {
             
             for(var i in jsonData)
             {
-                insertTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, "books", jsonData[i].year)
+                insertBookTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, jsonData[i].year)
             }
     
         } else {
@@ -42,7 +42,7 @@ function requestTopAuth() {
             
             for(var i in jsonData)
             {
-                insertTableRow(jsonData[i].title, jsonData[i].author, jsonData[i].difficulty, jsonData[i]._id, "authors", jsonData[i].year)
+                insertAuthTableRow(jsonData[i]._id, jsonData[i].difficulty)
             }
     
         } else {
@@ -71,7 +71,7 @@ function requestAvgDifficulty() {
     }
 }
 
-function insertTableRow(title, author, difficulty, id, table, year) {
+function insertBookTableRow(title, author, difficulty, id, year) {
     var newRow;
     var containerBlock ;
     
@@ -81,27 +81,33 @@ function insertTableRow(title, author, difficulty, id, table, year) {
         window.location.href = "book-analysis.html?id=" + id;
     
     }
+
+    rowsCounterBook++;
+    containerBlock = document.getElementById( 'tBodyIdBook' );
+    newRow.className = "tableRow";
+    newRow.innerHTML = 
+            '<th scope="row">' + rowsCounterBook.toString() + '</th>'
+        + '<td>'+ author + '</td>'
+        + '<td>"'+ title + ' ('+ year +')'+'"</td>'
+        + '<td>'+ difficulty + '</td>'    
+
+    containerBlock.appendChild( newRow );
+}
+
+function insertAuthTableRow(author, difficulty) {
+    var newRow;
+    var containerBlock ;
     
 
-    if(table === "books"){
-        rowsCounterBook++;
-        containerBlock = document.getElementById( 'tBodyIdBook' );
-        newRow.className = "tableRow";
-        newRow.innerHTML = 
-              '<th scope="row">' + rowsCounterBook.toString() + '</th>'
-            + '<td>'+ author + '</td>'
-            + '<td>"'+ title + ' ('+ year +')'+'"</td>'
-            + '<td>'+ difficulty + '</td>'    
-    } else {
-        rowsCounterAuth++;
-        containerBlock = document.getElementById( 'tBodyIdAuth' );
-        newRow.className = "tableRow";
-        newRow.innerHTML = 
-              '<th scope="row">' + rowsCounterAuth.toString() + '</th>'
-            + '<td>'+ author + '</td>'
-            + '<td>"'+ title + ' ('+ year +')'+'"</td>'
-            + '<td>'+ difficulty + '</td>'
-    }
+    newRow = document.createElement( 'tr' );
+    
+    rowsCounterAuth++;
+    containerBlock = document.getElementById( 'tBodyIdAuth' );
+    newRow.className = "tableRow";
+    newRow.innerHTML = 
+          '<th scope="row">' + rowsCounterAuth.toString() + '</th>'
+        + '<td>'+ author + '</td>'
+        + '<td>'+ difficulty + '</td>'
 
     containerBlock.appendChild( newRow );
 }

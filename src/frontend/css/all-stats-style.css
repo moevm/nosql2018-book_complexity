@@ -3,10 +3,10 @@
     padding-bottom: 100px;
     padding-top: 40px;
 }
-.tableRow{
+#topBooksTableId .tableRow{
     cursor: pointer;
 }
-.tableRow:hover{
+#topBooksTableId .tableRow:hover{
     background-color: silver;
 }
 .cont{
