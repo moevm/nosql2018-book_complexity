@@ -22,7 +22,6 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
         var ext = getExtension(inputedBookFiles[0].name);
         var formData = new FormData();
         var xhttp = new XMLHttpRequest();
-        console.log(ext);
         if (inputedImage.length === 1) {
             var extImg = getExtension(inputedImage[0].name);
             if(extImg.toLowerCase() != 'png' && extImg.toLowerCase() != 'jpeg' && extImg.toLowerCase() != 'jpg'){
@@ -43,8 +42,10 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
         formData.append("bookYear", inputedYear);
         formData.append('bookFile', $('input[type=file]#inputBookFile')[0].files[0]); 
 
+        console.log(formData.get('bookTitle'));
+        console.log(formData.get('bookAuthor'));
+        console.log(formData.get('bookFile'));
         xhttp.open("POST", "/bookUpload", true);
-        xhttp.setRequestHeader("Content-type", "multipart/form-data");
         xhttp.send(formData);
         document.getElementById("closeModal").click();
     }
