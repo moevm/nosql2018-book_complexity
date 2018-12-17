@@ -122,8 +122,8 @@ fun main(args: Array<String>) {
                     part.dispose()
                 }
 
-                if (book["text"] != null && book["title"] != null && book["author"] != null) {
-                    backend.processBook(book["text"]!!, book["title"]!!, book["author"]!!)
+                if (book["text"] != null && book["title"] != null && book["author"] != null && book["year"] != null) {
+                    backend.processBook(book["text"]!!, book["title"]!!, book["author"]!!, book["year"]!!)
                     call.respond(HttpStatusCode.Accepted)
                 }
                 else {

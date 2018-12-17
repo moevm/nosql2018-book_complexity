@@ -6,8 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="794caa4c-12c6-4e79-9425-a5c3bc4ea2c4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/modalForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/modalForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" afterDir="false" />
     </list>
@@ -92,8 +90,8 @@
           <entry key="gitignore" value="1" />
           <entry key="html" value="29" />
           <entry key="iml" value="1" />
-          <entry key="js" value="16" />
-          <entry key="kt" value="17" />
+          <entry key="js" value="17" />
+          <entry key="kt" value="18" />
           <entry key="md" value="1" />
           <entry key="png" value="1" />
           <entry key="xml" value="13" />
@@ -107,8 +105,8 @@
           <entry key="HTML" value="29" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Image" value="1" />
-          <entry key="JavaScript" value="16" />
-          <entry key="Kotlin" value="17" />
+          <entry key="JavaScript" value="17" />
+          <entry key="Kotlin" value="18" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="XML" value="13" />
@@ -119,7 +117,7 @@
         <counts>
           <entry key="html" value="69" />
           <entry key="js" value="24" />
-          <entry key="kt" value="9585" />
+          <entry key="kt" value="9657" />
           <entry key="xml" value="19" />
         </counts>
       </usages-collector>
@@ -127,7 +125,7 @@
         <counts>
           <entry key="HTML" value="69" />
           <entry key="JavaScript" value="24" />
-          <entry key="Kotlin" value="9585" />
+          <entry key="Kotlin" value="9657" />
           <entry key="XML" value="19" />
         </counts>
       </usages-collector>
@@ -135,11 +133,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="107" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="483">
+              <caret line="132" selection-start-line="132" selection-end-line="132" />
               <folding>
                 <element signature="e#29#588#0" expanded="true" />
               </folding>
@@ -147,20 +145,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/io/ktor/ktor-http-jvm/1.0.0/ktor-http-jvm-1.0.0.jar!/io/ktor/http/content/MultipartKt.class">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frontend/js/modalForm.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+            <state relative-caret-position="96">
+              <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -220,9 +209,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/mongo.js" />
         <option value="$PROJECT_DIR$/src/frontend/html/search-results.html" />
         <option value="$PROJECT_DIR$/src/frontend/html/book-analysis.html" />
+        <option value="$PROJECT_DIR$/src/frontend/js/modalForm.js" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt" />
-        <option value="$PROJECT_DIR$/src/frontend/js/modalForm.js" />
       </list>
     </option>
   </component>
@@ -355,7 +344,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545057402154" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545057614615" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -489,7 +478,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123657000" />
+    <option name="totallyTimeSpent" value="124442000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -502,8 +491,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="29" width="1920" height="1051" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3180363" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3180363" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -513,7 +503,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32929516" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32819384" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4994664" visible="true" weight="0.32929516" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4994664" visible="true" weight="0.32929516" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32929516" />
@@ -547,12 +537,6 @@
           <line>121</line>
           <properties />
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt</url>
-          <line>86</line>
-          <properties />
-          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -827,24 +811,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="126" selection-start-line="126" selection-end-line="126" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/io/ktor/ktor-utils-jvm/1.0.0/ktor-utils-jvm-1.0.0.jar!/io/ktor/util/pipeline/SuspendFunctionGun.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="429">
           <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/frontend/js/modalForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -855,13 +825,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/frontend/js/modalForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="483">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
           <folding>
             <element signature="e#29#588#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/bookscomplexity/ServerSide.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
         </state>
       </provider>
     </entry>

@@ -41,7 +41,7 @@ class ServerSide private constructor() {
         val instance: ServerSide by lazy { Holder.INSTANCE }
     }
 
-    fun processBook(text: String, title: String, author: String) {
+    fun processBook(text: String, title: String, author: String, year: String) {
         val texts = database.getCollection<Text>("texts")
         texts.insertOne(Text(0, text))
 
@@ -50,7 +50,7 @@ class ServerSide private constructor() {
         val id_hash = log_splitted?.get(log_splitted.size - 3)?.substring(10, 34)
         val id = ObjectId(id_hash)
 
-        val update = "{$set: {title: \"$title\", author: \"$author\"}}"
+        val update = "{$set: {title: \"$title\", author: \"$author\", year: \"$year\"}}"
         col.updateOneById(id, update)
     }
 
