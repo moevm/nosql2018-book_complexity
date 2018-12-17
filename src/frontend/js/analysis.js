@@ -65,6 +65,7 @@ var xArr = new Array();
 var yArr = new Array();
 
 var arrayLength;
+
 if (dataArray.length > 52){
     arrayLength = 52;
 } else {
