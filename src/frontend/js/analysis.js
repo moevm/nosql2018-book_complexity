@@ -65,6 +65,7 @@ var xArr = new Array();
 var yArr = new Array();
 
 var arrayLength;
+
 if (dataArray.length > 52){
     arrayLength = 52;
 } else {
@@ -75,8 +76,6 @@ for (var i = 0; i < arrayLength; i++) {
     yArr[i] = dataArray[i] * 100 / 255;
     xArr[i] = 1500 + i * 10;
 }
-
-console.log(yArr);
 
 var trace1 = {
 

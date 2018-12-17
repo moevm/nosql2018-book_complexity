@@ -11,7 +11,7 @@
     <title>Books complexity online</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/main-style.css" rel="stylesheet">
@@ -23,87 +23,89 @@
 
   <body>
 
-    
-
-    <!-- Header with Background Image -->
-    <header class="business-header">
+  
      	<div class="container">
-	        <div class="row">
-	        	<div class="col-md-10 col-lg-9 col-xl-8 mx-auto text-white text-center shadowed-text">
-	            	<h1 class="mb-5">Find the book in our database:</h1>
-	        	</div>
-	        </div>
-	        <div class="col-md-10 col-lg-9 col-xl-8 mx-auto">
-	            <form method="GET" action="html/search-results.html">
-	              	<div class="form-row">
-		                <div class="col-9">
-		                  <input class="form-control form-control-md" name="searchedBook" placeholder="Enter the name of the book ...">
-		                </div>
-		                <div class="col-3">
-		                  <button type="submit" class="btn btn-block btn-md btn-primary"><b>search</b></button>
-		                </div>
-	              	</div>
-	            </form>
-	              	<div class="form-row">
-	              		<div class="col-9"></div>
-	              		<div class="col-3" ><a href="/html/all-statistics.html" class="btn btn-md btn-link btn-block text-white shadowed-text">or show all</a></div>
-	            	</div>
-	        </div>
-       	</div>
-      
-    </header>
-
-    <!-- Page Content -->
-    <div class="container">
-        <!-- delete -->
-        <!-- <div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Click Me</button></div> -->
-        <!-- delete -->
-      <div id="drop-zone" class="drpzn">
-        <div id="dz-msg" style="pointer-events: none;"><br><br><b>Upload your book for analysis (txt/epub/fb2)</b><br><i>Drag and drop file here or click on this area</i></div>
-      </div>
-
-      <!-- The Modal -->
-      <div id="myModal" class="propmodal">
-        <!-- Modal content -->
-        <div class="propmodal-content ">    
-          <div class="modal-header">
-            <h4 class="modal-title" id="lineModalLabel">Input book properties</h4>
-            <span class="propmodal-close">&times;</span>
+        <div class="row">
+          <div class="col-md-10 col-lg-9 col-xl-8 mx-auto text-white text-center shadowed-text">
+              <h1 class="mb-5">Find the book in our database:</h1>
           </div>
-          <form id="infoFormId">
-            <div class="form-group">
-              <label>Book title:</label>
-              <input name="bookTitle" id="btId" class="form-control" placeholder="Enter book title">
+        </div>
+        <div class="col-md-10 col-lg-9 col-xl-8 mx-auto">
+          <form method="GET" action="html/search-results.html">
+            <div class="form-row">
+              <div class="col-9">
+                <input class="form-control form-control-md" name="searchedBook" placeholder="Enter the name of the book ...">
+              </div>
+              <div class="col-3">
+                <button type="submit" class="btn btn-block btn-md btn-primary"><b>search</b></button>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Author:</label>
-              <input name="bookAuthor" id="baId" class="form-control" placeholder="Enter author">
-            </div>
-            <div class="form-group">
-              <label>Publication year:</label>
-              <input name="bookAuthor" id="byId" class="form-control" placeholder="Enter year">
-            </div>
-            <button type="submit" id="sbmt-btn" class="btn btn-primary center-block">Submit</button>
           </form>
-        </div>
-      </div> 
-
-      <!-- The Modal -->
-      <div id="errmodal" class="propmodal">
-        <!-- Modal content -->
-        <div class="propmodal-content ">    
-          <div class="modal-header">
-            <h5 class="modal-title" id="error-msg">You can not upload more than one book at once</h5>
-            <button type="button" class="close" id="errClose">&times;</button>
+          <div class="form-row">
+            <div class="col-9"></div>
+            <div class="col-3" ><a href="/html/all-statistics.html" class="btn btn-md btn-link btn-block text-white shadowed-text">or show all</a></div>
           </div>
         </div>
-      </div> 
+       
+        
+          <div class="text-center uploadButtonDiv">
+            <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block uploadButton">
+              <img class="uploadIcon" src="img/upload.png"><br>
+              Upload a new book
+            </button>
+          </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Fill the book info</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+              <form id="infoFormId">
+                
+                <div class="form-group">
+                  <label>Book title</label>
+                  <input type="text" class="form-control" id="inputTitle" placeholder="Input book title">
+                </div>
+                <div class="form-group">
+                  <label>Author</label>
+                  <input type="text" class="form-control" id="inputAuthor" placeholder="Input book author">
+                </div>
+                <div class="form-group">
+                  <label>Publication year</label>
+                  <input type="text" class="form-control" id="inputYear" placeholder="Input publication year">
+                </div>
+                <div class="form-group">
+                  <label>Book image (optional):</label>
+                  <input type="file" class="form-control-file" id="inputImage" accept="image/png, image/jpeg">
+                </div>
+                <div class="form-group">
+                  <label>Book file (pdf/fb2/epub):</label>
+                  <input type="file" class="form-control-file" id="inputBookFile" accept="application/pdf,application/epub+zip,.fb2,.txt">
+                </div>
+                <div class="errorSection" id="err"></div>
+                <div class="row align-items-center justify-content-center" style="margin-top:20px;">
+                  <button type="submit" class="btn btn-primary center">Submit</button>
+                </div>
+              </form>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
     
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="js/dragAndDrop.js"></script>
+    <script src="vendor/bootstrap4/js/bootstrap.min.js"></script>
+    <script src="js/modalForm.js"></script>
   </body>
 
 </html>
