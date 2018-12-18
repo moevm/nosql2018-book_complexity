@@ -13,7 +13,10 @@ import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import nl.siegmann.epublib.epub.EpubReader
+import org.jsoup.Jsoup
 import java.io.File
+import java.io.FileInputStream
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
@@ -107,7 +110,7 @@ fun main(args: Array<String>) {
                                 val fb2 = FictionBook(File("src/book.fb2"))
                                 Files.delete(pathOfBook)
 
-                                var result: String = ""
+                                var result = ""
 
                                 for (chapter in fb2.body.sections) {
                                     for (element in chapter.elements) {
@@ -116,6 +119,31 @@ fun main(args: Array<String>) {
                                 }
 
                                 book += "text" to result
+                            }
+
+                            if (part.originalFileName!!.endsWith("epub")) {
+                                val pathOfBook = Path.of("src/book.epub")
+                                Files.copy(part.streamProvider(), pathOfBook)
+
+                                val epub = EpubReader().readEpub(FileInputStream(pathOfBook.toString()))
+                                Files.delete(pathOfBook)
+
+                                val spine = epub.spine
+                                var result = ""
+                                val coverIndex = spine.getResourceIndex("cover.xhtml")
+
+                                for (i in (coverIndex + 1) until spine.size()) {
+                                    result += spine.getResource(i).data.toString(Charset.defaultCharset())
+                                }
+
+                                val text = Jsoup.parse(result)
+                                        .select("p")
+                                        .eachText()
+                                        .toString()
+                                        .drop(1)
+                                        .dropLast(1)
+
+                                book += "text" to text
                             }
                         }
                     }
