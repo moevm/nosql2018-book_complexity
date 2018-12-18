@@ -130,9 +130,8 @@ fun main(args: Array<String>) {
 
                                 val spine = epub.spine
                                 var result = ""
-                                val coverIndex = spine.getResourceIndex("cover.xhtml")
 
-                                for (i in (coverIndex + 1) until spine.size()) {
+                                for (i in 0 until spine.size()) {
                                     result += spine.getResource(i).data.toString(Charset.defaultCharset())
                                 }
 
