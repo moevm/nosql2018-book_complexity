@@ -12,14 +12,27 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
     inputedYear = $("input#inputYear").val();
     inputedBookFiles = document.getElementById("inputBookFile").files;
     inputedImage = document.getElementById("inputImage").files;
+    
 
-    if (!(inputedAuthor && inputedTitle && inputedYear ) || inputedBookFiles.length === 0){
+    if ( inputedBookFiles.length === 0){
         console.log("missing input param(s)");  
-        showError("Some fields are empty");
+        showError("No book is chosen");
         return;
-    }
-    else {
+    } else {
         var ext = getExtension(inputedBookFiles[0].name);
+        if (ext.toLowerCase() === "epub") {
+            makeUpload(ext);
+        }
+        else if (!(inputedAuthor && inputedTitle && inputedYear)){
+            console.log(ext);  
+            showError("Some fieds are empty");
+            return;
+        } else 
+            makeUpload(ext);
+    }
+
+    function makeUpload(ext){
+        
         var formData = new FormData();
         var xhttp = new XMLHttpRequest();
         if (inputedImage.length === 1) {
@@ -46,6 +59,7 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
         console.log(formData.get('bookAuthor'));
         console.log(formData.get('bookFile'));
         xhttp.open("POST", "/bookUpload", true);
+        xhttp.setRequestHeader("Content-type", "undefined");
         xhttp.send(formData);
         document.getElementById("closeModal").click();
     }
