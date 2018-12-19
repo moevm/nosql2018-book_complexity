@@ -1,6 +1,4 @@
-div{
-    overflow: hidden;
-}
+
 div#drpznID{
     width: 220px;
     height: 300px;
@@ -8,7 +6,7 @@ div#drpznID{
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-style: dashed;
     border-radius: 20px;
-    overflow-y: scroll
+    overflow-y: auto;
 }
 div#drpznID:hover{
     cursor: pointer;
