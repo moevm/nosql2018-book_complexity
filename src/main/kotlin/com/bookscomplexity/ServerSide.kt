@@ -5,34 +5,22 @@ import org.bson.BsonDocument
 import org.bson.types.ObjectId
 import org.litote.kmongo.*
 import org.litote.kmongo.MongoOperator.*
-import java.io.IOException
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
+import com.mongodb.client.gridfs.GridFSBuckets
+import com.mongodb.client.gridfs.GridFSBucket
+import java.io.*
+
 
 data class Text (val _id: Int,
                  val text: String)
-
-fun String.runCommand(): String? {
-    try {
-        val parts = arrayOf("/bin/sh", "-c", this)
-        val proc = ProcessBuilder(*parts)
-                .redirectOutput(ProcessBuilder.Redirect.PIPE)
-                .redirectError(ProcessBuilder.Redirect.PIPE)
-                .start()
-
-        proc.waitFor(60, TimeUnit.MINUTES)
-        return proc.inputStream.bufferedReader().readText() + proc.errorStream.bufferedReader().readText()
-    } catch(e: IOException) {
-        e.printStackTrace()
-        return null
-    }
-}
 
 class ServerSide private constructor() {
 
     private val client = KMongo.createClient()
     private val database = client.getDatabase("nosql")
     private val col = database.getCollection("books_stats")
+    private val gridFSBucket = GridFSBuckets.create(database)
 
 
     private object Holder { val INSTANCE = ServerSide() }
@@ -41,17 +29,22 @@ class ServerSide private constructor() {
         val instance: ServerSide by lazy { Holder.INSTANCE }
     }
 
-    fun processBook(text: String, title: String, author: String, year: String) {
+    fun saveBook(text: String, title: String, author: String, year: String, coverHexId: String) {
         val texts = database.getCollection<Text>("texts")
         texts.insertOne(Text(0, text))
 
+        val id = processBook()
+        val coverId = ObjectId(coverHexId)
+        val updateRequest = "{$set: {title: \"$title\", author: \"$author\", year: $year, cover: ${coverId.json}}}"
+        col.updateOneById(id, updateRequest)
+    }
+
+    private fun processBook(): ObjectId {
         val log = "mongo < src/main/resources/mongo.js".runCommand()
         val log_splitted = log?.split("\n")
         val id_hash = log_splitted?.get(log_splitted.size - 3)?.substring(10, 34)
-        val id = ObjectId(id_hash)
 
-        val update = "{$set: {title: \"$title\", author: \"$author\", year: \"$year\"}}"
-        col.updateOneById(id, update)
+        return ObjectId(id_hash)
     }
 
     fun getBookInfo(bookId: String): String {
@@ -66,9 +59,23 @@ class ServerSide private constructor() {
         return Gson().toJson(result)
     }
 
+    fun saveCover(dataStream: InputStream): ObjectId {
+        // save cover to db and return its name
+
+        val fileId = gridFSBucket.uploadFromStream("mongodb-tutorial", dataStream)
+        return fileId
+    }
+
+    fun getCover(id: ObjectId): ByteArray {
+        val streamToDownloadTo = ByteArrayOutputStream()
+        gridFSBucket.downloadToStream(id, streamToDownloadTo);
+        // streamToDownloadTo.close();
+        return streamToDownloadTo.toByteArray()
+    }
+
 
     fun getBooksFromDB(order: String): String {
-        col.createIndex("{ title: \"text\", author: \"text\" }")
+        // col.createIndex("{ title: \"text\", author: \"text\" }")
 
         val result = col.find(" { \$text: { \$search: \"$order\" } }")
                 .toMutableList()
@@ -80,13 +87,12 @@ class ServerSide private constructor() {
     fun getTopBooks(): String {
         val result = col.find().sort("{difficulty: -1}").limit(10)
                 .toMutableList()
-        result.forEach { it["_id"] = it["_id"].toString() }
+        result.forEach { it["_id"] = it["_id"].toString(); it["cover"] = it["cover"].toString() }
         return Gson().toJson(result)
     }
 
 
     fun getTopAuthors(): String {
-
         val json = """
             [
                 {
@@ -105,7 +111,6 @@ class ServerSide private constructor() {
     }
 
     fun getAvgDifficulty(): String {
-
         val json = """[
             {
                 $group: {

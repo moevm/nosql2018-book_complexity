@@ -1,15 +1,14 @@
 package com.bookscomplexity
 
-import com.kursx.parser.fb2.FictionBook
 import io.ktor.application.call
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.receiveMultipart
 import io.ktor.request.receiveParameters
-import io.ktor.response.respond
-import io.ktor.response.respondText
+import io.ktor.response.*
 import io.ktor.routing.post
+import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -20,6 +19,11 @@ import java.io.FileInputStream
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
+import java.time.ZoneId
+import nl.siegmann.epublib.domain.Date
+import org.bson.types.ObjectId
+
 
 
 fun main(args: Array<String>) {
@@ -47,6 +51,13 @@ fun main(args: Array<String>) {
                 }
                 file("/index.html", "index.html")
                 default("index.html")
+            }
+
+            get("/cover") {
+                val parameters = call.request.queryParameters
+                val idHexString = parameters["id"]
+                val cover = backend.getCover(ObjectId(idHexString))
+                call.respondBytes(cover, ContentType.Image.JPEG, HttpStatusCode.OK)
             }
 
             post("/SearchResultServlet") {
@@ -84,12 +95,13 @@ fun main(args: Array<String>) {
 
             post("/bookUpload") {
                 val multipart = call.receiveMultipart()
-                val book = mutableMapOf<String, String>()
+                val bookInfoFromRequest = mutableMapOf<String, String>()
+                var bookInfoFromEBook = mutableMapOf<String, String>()
 
                 multipart.forEachPart { part ->
                     when (part) {
                         is PartData.FormItem -> {
-                            book +=
+                            bookInfoFromRequest +=
                                     when (part.name) {
                                         "bookTitle" -> "title" to part.value
                                         "bookAuthor" -> "author" to part.value
@@ -98,66 +110,42 @@ fun main(args: Array<String>) {
                                     }
                         }
                         is PartData.FileItem -> {
-                            if (part.originalFileName!!.endsWith("txt")) {
+                            val originalFileName = part.originalFileName!!.toLowerCase()
+                            if (originalFileName.endsWith("txt")) {
                                 val bytes = part.streamProvider().readBytes()
-                                book += "text" to bytes.toString(Charset.defaultCharset())
+                                bookInfoFromEBook.put("text", bytes.toString(Charset.defaultCharset()))
                             }
 
-                            if (part.originalFileName!!.endsWith("fb2")) {
-                                val pathOfBook = Path.of("src/book.fb2")
+                            if (originalFileName.endsWith("epub")) {
+                                val pathOfBook = Paths.get("src/book.epub")
                                 Files.copy(part.streamProvider(), pathOfBook)
-
-                                val fb2 = FictionBook(File("src/book.fb2"))
+                                bookInfoFromEBook.putAll(parseEPUB(pathOfBook))
                                 Files.delete(pathOfBook)
-
-                                var result = ""
-
-                                for (chapter in fb2.body.sections) {
-                                    for (element in chapter.elements) {
-                                        result += element.text + " "
-                                    }
-                                }
-
-                                book += "text" to result
                             }
 
-                            if (part.originalFileName!!.endsWith("epub")) {
-                                val pathOfBook = Path.of("src/book.epub")
-                                Files.copy(part.streamProvider(), pathOfBook)
-
-                                val epub = EpubReader().readEpub(FileInputStream(pathOfBook.toString()))
-                                Files.delete(pathOfBook)
-
-                                val spine = epub.spine
-                                var result = ""
-
-                                for (i in 0 until spine.size()) {
-                                    result += spine.getResource(i).data.toString(Charset.defaultCharset())
-                                }
-
-                                val text = Jsoup.parse(result)
-                                        .select("p")
-                                        .eachText()
-                                        .toString()
-                                        .drop(1)
-                                        .dropLast(1)
-
-                                book += "text" to text
+                            if (originalFileName.endsWith("jpg")) {
+                                val id = backend.saveCover(part.streamProvider())
+                                bookInfoFromRequest["cover"] = id.toHexString()
+                                // todo if user send cover and cover exist in ebook then ether of them will be saved to GridFS
                             }
                         }
                     }
                     part.dispose()
                 }
 
-                if (book["text"] != null && book["title"] != null && book["author"] != null && book["year"] != null) {
-                    backend.processBook(book["text"]!!, book["title"]!!, book["author"]!!, book["year"]!!)
+                val bookInfo = bookInfoFromEBook
+                bookInfo.putAll(bookInfoFromRequest) // values in bookInfoFromRequest rewrite values in bookInfo
+
+                if (bookInfo["text"] != null && bookInfo["title"] != null && bookInfo["author"] != null &&
+                        bookInfo["year"] != null && bookInfo["cover"] != null) {
+                    backend.saveBook(bookInfo["text"]!!, bookInfo["title"]!!,
+                                        bookInfo["author"]!!, bookInfo["year"]!!,
+                                        bookInfo["cover"]!!)
                     call.respond(HttpStatusCode.Accepted)
                 }
                 else {
                     call.respond(HttpStatusCode.NotAcceptable)
                 }
-
-
             }
         }
     }.start(wait = true)
