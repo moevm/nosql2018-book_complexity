@@ -1,10 +1,5 @@
 use nosql;
 
-db.words_stats.insert([
-    { _id: "feminism", years: [0, 0, 1, 2, 2] },
-    { _id: "movements", years: [2, 2, 2, 2, 2] }
-]);
-
 id = 0;
 
 db.texts.aggregate([
@@ -27,7 +22,13 @@ var reduceFunction = function(key, values) {
 
 db.book_splited_text.mapReduce( mapFunction, reduceFunction, "book_unique_words" );
 
+var unique_words_count = db.book_unique_words.count();
+
+var limit = Math.floor(0.2*unique_words_count);
+
 db.book_unique_words.aggregate( [
+    { $sort: {"value": 1}},
+    { $limit: limit },
     { $lookup: {
             from: "words_stats",
             localField: "_id",
@@ -46,37 +47,47 @@ db.book_unique_words.aggregate( [
 ]);
 
 var words_count = db.book_splited_text.count();
-var unique_words_count = db.book_unique_words.count();
 
 var mapFunction = function() {
-    emit(1, this.years.map(x => this.count*x));
+    emit(1, {arr: this.years.map(x => this.count*x)});
 };
 
 var reduceFunction = function(key, values) {
-    var years = values.reduce(
-        (acc, current) =>
-            acc.map( (x, i) => x + current[i] )
+    values = values.map( x => x.arr );
+
+    res = values.reduce(
+        (acc, current, idx) => {
+            return acc.map( (x, i) => x + current[i] )
+        }
     );
-    var max_year = Math.max(...years);
-
-    var normalized_years = years.map(x => Math.floor(255*x/max_year));
-    var lexicon_rarity = years.reduce((a, b) => a + b, 0) / words_count;
-
-    return {lexicon_years: normalized_years, lexicon_rarity: lexicon_rarity};
+    return {arr: res};
 };
 
-var res = db.runCommand(
+var get_lexicon_years = function (years) {
+    var max_year = Math.max(...years);
+    return years.map(x => Math.floor(255*x/max_year));
+};
+
+var years = db.runCommand(
     {
         mapReduce: "book_unique_words_with_stats",
         map: mapFunction,
         reduce: reduceFunction,
-        out: { inline: 1 },
-        scope: {words_count: words_count}
+        out: { inline: 1 }
     }
-)["results"][0]["value"];
+)["results"][0]["value"]["arr"];
 
-var lexicon_years = res.lexicon_years;
-var lexicon_rarity = res.lexicon_rarity;
+
+var lexicon_years = get_lexicon_years(years);
+
+var lexicon_rarity = db.book_unique_words_with_stats.aggregate( [
+    { $project: {d: { $multiply: ["$count", {$arrayElemAt: ["$years", 50]}]  }, n: "$count" }},
+    { $group: {_id: null, d: {$sum: "$d"}, n: {$sum: "$n"} } },
+    { $project: {result: {$divide: ["$d", "$n"] } } }
+]).toArray()[0]["result"];
+
+
+// stemming
 
 var stemmer = function(w) {
     var step2list = {
@@ -296,5 +307,5 @@ db.book_splited_text.drop();
 db.book_unique_words.drop();
 db.book_unique_words_with_stats.drop();
 db.book_stemmed_words.drop();
-db.words_stats.drop();
+
 id
