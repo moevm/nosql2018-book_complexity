@@ -75,3 +75,8 @@ function getExtension(filename) {
     var parts = filename.split('.');
     return parts[parts.length - 1];
 }
+
+$('a#exportID').click(function(e) {
+    e.preventDefault();  //stop the browser from following
+    window.location.href = '/export';
+});

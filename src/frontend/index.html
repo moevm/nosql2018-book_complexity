@@ -12,6 +12,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/dropzone/dropzone.css" rel="stylesheet">
+    <link href="css/drpzn-style.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/main-style.css" rel="stylesheet">
@@ -45,12 +47,8 @@
         </div>
        
         
-          <div class="text-center uploadButtonDiv">
-            <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block uploadButton">
-              <img class="uploadIcon" src="img/upload.png"><br>
-              Upload a new book
-            </button>
-          </div>
+          
+         
         
         <!-- Modal -->
         <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -96,10 +94,64 @@
             </div>
           </div>
         </div>
+        </div>
+
+
+        <!-- Modal DB-->
+        <div class="modal fade" id="dbModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Import or expot database</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table>
+                  <tr>
+                    <td>
+                      <div id="drpznID" class="dropzone"></div>
+                    </td>
+                    <td>
+                      <a id ="exportID" href="#"><button data-toggle="modal" class="btn btn-primary uploadButton">
+                          Export DB
+                      </button></a>
+                    </td>
+                  </tr>
+                </table>  
+                  
+                
+  
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="uploadButtonDiv">
+          <table class="center">
+              <tr>
+                  <td>
+                      <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary text-center uploadButton">
+                        <img class="uploadIcon" src="img/upload.png"><br>
+                        Upload a new book
+                      </button>
+                  </td>
+                  <td>
+                      <button data-toggle="modal" data-target="#dbModal" data-target="html/db.html" class="btn btn-primary text-center uploadButton">
+                        <img class="uploadIcon" src="img/db.png"><br>
+                        Import/Export DB
+                      </button>
+                  </td>
+                </tr>
+          </table>
+
       </div>
     
 
     <!-- Bootstrap core JavaScript -->
+    <script src="vendor/dropzone/dropzone.js"></script>
+    <script src="js/drpzn.js"></script>
     <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/bootstrap4/js/bootstrap.min.js"></script>
     <script src="js/modalForm.js"></script>
