@@ -23,9 +23,10 @@ xhttp.onreadystatechange = function() {
     var dif = jsonData.difficulty 
     console.log("succsess ");
     drawGraphic(jsonData.lexicon_years);
-    
-    document.getElementById('name').innerHTML = 'Name: &nbsp;&nbsp;"' + jsonData.title + ' (' + jsonData.year + ')' + '"<br>';
-    document.getElementById('auth').innerHTML = 'Author: &nbsp;&nbsp;"' + jsonData.author + '"<br>';
+    document.getElementById('bookImg').innerHTML = '<img class="book-image-block" src="./cover?id=' + jsonData.cover +'">'
+
+    document.getElementById('name').innerHTML = 'Title: &nbsp;&nbsp;"' + jsonData.title + '" (' + jsonData.year + ')' + '<br>';
+    document.getElementById('auth').innerHTML = 'Author: &nbsp;&nbsp;' + jsonData.author + '<br>';
     document.getElementById('uwords').innerHTML = 'Unique words: &nbsp;&nbsp;' + jsonData.unique_words_count + '<br>';
     document.getElementById('nwords').innerHTML = 'Number of words: &nbsp;&nbsp;' + jsonData.words_count + '<br>';
     
