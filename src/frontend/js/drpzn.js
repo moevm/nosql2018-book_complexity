@@ -3,8 +3,8 @@ Dropzone.autoDiscover = false;
 dropzoneOptions = {
 
     url: '/import',
-    dictDefaultMessage: 'Drop <i>yout_db_name.bson</i> file here or click to choose from a file system',
-    acceptedFiles: ".bson",
+    dictDefaultMessage: 'Drop <i>yout_db_name.json</i> file here or click to choose from a file system',
+    acceptedFiles: ".json",
     maxFiles: 1,
     addRemoveLinks: true
   };
