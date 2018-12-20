@@ -20,11 +20,12 @@ xhttp.send("id=" + id);
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     var jsonData = JSON.parse(this.responseText);
-    var dif = jsonData.difficulty 
+    var dif = jsonData.difficulty;
     console.log("succsess ");
     drawGraphic(jsonData.lexicon_years);
 
-    document.getElementById('bookImg').innerHTML = '<img class="book-image-block" src="./cover?id=' + jsonData.cover +'">'
+    document.getElementById('bookImg').innerHTML = '<img class="book-image-block" src="../cover?id=' + jsonData.cover +'">';
+
 
     document.getElementById('name').innerHTML = 'Title: &nbsp;&nbsp;"' + jsonData.title + '" (' + jsonData.year + ')' + '<br>';
     document.getElementById('auth').innerHTML = 'Author: &nbsp;&nbsp;' + jsonData.author + '<br>';

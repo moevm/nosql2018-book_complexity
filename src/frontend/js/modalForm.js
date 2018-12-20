@@ -59,7 +59,6 @@ $( "form#infoFormId" ).on( "submit", function( event ) {
         console.log(formData.get('bookAuthor'));
         console.log(formData.get('bookFile'));
         xhttp.open("POST", "/bookUpload", true);
-        xhttp.setRequestHeader("Content-type", "undefined");
         xhttp.send(formData);
         document.getElementById("closeModal").click();
     }

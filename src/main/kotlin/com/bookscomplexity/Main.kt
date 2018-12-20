@@ -23,7 +23,7 @@ import java.nio.file.Paths
 import java.time.ZoneId
 import nl.siegmann.epublib.domain.Date
 import org.bson.types.ObjectId
-
+import java.io.InputStream
 
 
 fun main(args: Array<String>) {
@@ -96,19 +96,23 @@ fun main(args: Array<String>) {
             post("/bookUpload") {
                 val multipart = call.receiveMultipart()
                 val bookInfoFromRequest = mutableMapOf<String, String>()
-                var bookInfoFromEBook = mutableMapOf<String, String>()
+                val bookInfoFromEBook = mutableMapOf<String, String>()
+                var cover: ByteArray? = null
 
                 multipart.forEachPart { part ->
                     when (part) {
                         is PartData.FormItem -> {
-                            bookInfoFromRequest +=
+                            if (part.value != "") {
+                                bookInfoFromRequest +=
                                     when (part.name) {
                                         "bookTitle" -> "title" to part.value
                                         "bookAuthor" -> "author" to part.value
                                         "bookYear" -> "year" to part.value
                                         else -> return@forEachPart
                                     }
+                            }
                         }
+
                         is PartData.FileItem -> {
                             val originalFileName = part.originalFileName!!.toLowerCase()
                             if (originalFileName.endsWith("txt")) {
@@ -119,14 +123,15 @@ fun main(args: Array<String>) {
                             if (originalFileName.endsWith("epub")) {
                                 val pathOfBook = Paths.get("src/book.epub")
                                 Files.copy(part.streamProvider(), pathOfBook)
-                                bookInfoFromEBook.putAll(parseEPUB(pathOfBook))
+                                val epub = EpubReader().readEpub(FileInputStream(pathOfBook.toString()))
                                 Files.delete(pathOfBook)
+
+                                bookInfoFromEBook.putAll(parseEPUB(epub))
+                                if (cover == null) cover = getEPUBCover(epub)
                             }
 
                             if (originalFileName.endsWith("jpg")) {
-                                val id = backend.saveCover(part.streamProvider())
-                                bookInfoFromRequest["cover"] = id.toHexString()
-                                // todo if user send cover and cover exist in ebook then ether of them will be saved to GridFS
+                                cover = part.streamProvider().readBytes()
                             }
                         }
                     }
@@ -136,12 +141,17 @@ fun main(args: Array<String>) {
                 val bookInfo = bookInfoFromEBook
                 bookInfo.putAll(bookInfoFromRequest) // values in bookInfoFromRequest rewrite values in bookInfo
 
-                if (bookInfo["text"] != null && bookInfo["title"] != null && bookInfo["author"] != null &&
-                        bookInfo["year"] != null && bookInfo["cover"] != null) {
-                    backend.saveBook(bookInfo["text"]!!, bookInfo["title"]!!,
-                                        bookInfo["author"]!!, bookInfo["year"]!!,
-                                        bookInfo["cover"]!!)
-                    call.respond(HttpStatusCode.Accepted)
+                if (cover != null) {
+                    val id = backend.saveCover(cover)
+                    bookInfo["cover"] = id.toHexString()
+                } else {
+                    // standard cover
+                    bookInfo["cover"] = "5c1acd37de5f05148d0763db"
+                }
+
+                if (bookInfo["text"] != null && bookInfo["title"] != null && bookInfo["author"] != null && bookInfo["year"] != null) {
+                    backend.saveBook(bookInfo["text"]!!, bookInfo["title"]!!, bookInfo["author"]!!, bookInfo["year"]!!, bookInfo["cover"]!!)
+                    call.respondRedirect("/nahi")
                 }
                 else {
                     call.respond(HttpStatusCode.NotAcceptable)

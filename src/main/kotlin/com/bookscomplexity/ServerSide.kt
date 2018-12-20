@@ -52,6 +52,7 @@ class ServerSide private constructor() {
 
         try {
             result!!["_id"] = result["_id"].toString()
+            result!!["cover"] = result["cover"].toString()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -59,10 +60,10 @@ class ServerSide private constructor() {
         return Gson().toJson(result)
     }
 
-    fun saveCover(dataStream: InputStream): ObjectId {
+    fun saveCover(cover: ByteArray?): ObjectId {
         // save cover to db and return its name
 
-        val fileId = gridFSBucket.uploadFromStream("mongodb-tutorial", dataStream)
+        val fileId = gridFSBucket.uploadFromStream("mongodb-tutorial", ByteArrayInputStream(cover))
         return fileId
     }
 
@@ -75,7 +76,7 @@ class ServerSide private constructor() {
 
 
     fun getBooksFromDB(order: String): String {
-        // col.createIndex("{ title: \"text\", author: \"text\" }")
+        col.createIndex("{ title: \"text\", author: \"text\" }")
 
         val result = col.find(" { \$text: { \$search: \"$order\" } }")
                 .toMutableList()
@@ -87,7 +88,7 @@ class ServerSide private constructor() {
     fun getTopBooks(): String {
         val result = col.find().sort("{difficulty: -1}").limit(10)
                 .toMutableList()
-        result.forEach { it["_id"] = it["_id"].toString(); it["cover"] = it["cover"].toString() }
+        result.forEach { it["_id"] = it["_id"].toString() }
         return Gson().toJson(result)
     }
 
@@ -113,6 +114,11 @@ class ServerSide private constructor() {
     fun getAvgDifficulty(): String {
         val json = """[
             {
+                $match: {
+                    year: { $exists: true, $ne: null }
+                }
+            },
+            {
                 $group: {
                     _id: {$multiply: [10, {$floor: {$divide: ["$ year", 10]}}]},
                     difficulty: { $avg: "$ difficulty"}
@@ -125,7 +131,7 @@ class ServerSide private constructor() {
         val difficultyArray = DoubleArray(60)
 
         avgDif.forEach {
-            val index = (it["_id"]?.asDouble()?.intValue()!! - 1500) / 60
+            val index = (it["_id"]?.asDouble()?.intValue()!! - 1500) / 10
             difficultyArray[index] = it["difficulty"]?.asDouble()?.value!!
         }
 

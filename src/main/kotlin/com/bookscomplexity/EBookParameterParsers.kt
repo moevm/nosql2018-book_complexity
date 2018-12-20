@@ -1,19 +1,14 @@
 package com.bookscomplexity
 
-import io.ktor.http.content.streamProvider
+import nl.siegmann.epublib.domain.Book
 import nl.siegmann.epublib.domain.Date
-import nl.siegmann.epublib.epub.EpubReader
 import org.jsoup.Jsoup
-import java.io.FileInputStream
+import java.io.ByteArrayInputStream
 import java.nio.charset.Charset
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.nio.file.Path
 
-fun parseEPUB(pathOfBook: Path): MutableMap<String, String> {
+
+fun parseEPUB(epub: Book): MutableMap<String, String> {
     val bookInfo = mutableMapOf<String, String>()
-
-    val epub = EpubReader().readEpub(FileInputStream(pathOfBook.toString()))
 
     val spine = epub.spine
     var result = ""
@@ -31,8 +26,7 @@ fun parseEPUB(pathOfBook: Path): MutableMap<String, String> {
 
     bookInfo += "text" to text
 
-
-    val metadata = epub.metadata;
+    val metadata = epub.metadata
 
     val authors = metadata.authors.joinToString()
     bookInfo += "author" to authors
@@ -49,6 +43,19 @@ fun parseEPUB(pathOfBook: Path): MutableMap<String, String> {
     }
 
     return bookInfo
+}
+
+fun getEPUBCover(epub: Book): ByteArray? {
+    if (epub.coverImage != null) {
+        return epub.coverImage.data
+    } else {
+        for (resource in epub.resources.all) {
+            if (resource.mediaType.name == "image/jpeg") {
+                return resource.data
+            }
+        }
+    }
+    return null
 }
 
 
