@@ -34,11 +34,18 @@ fun saveBook(bookPath: String) {
 }
 
 fun main() {
-    /*
+
+    saveBook("../python/texts/aleph.gutenberg.org/cache/epub/10003/pg10003-images.epub")
+
     for (line in File("../resources/books_paths.txt").readLines()) {
         println(line)
         saveBook(line)
+        Thread.sleep(10_000)
     }
-    */
-    saveBook("../python/texts/aleph.gutenberg.org/cache/epub/10003/pg10003-images.epub")
+
+    // print("start")
+    // Thread.sleep(4_000)
+    // print("end")
+    // saveBook("../python/texts/aleph.gutenberg.org/cache/epub/10003/pg10003-images.epub")
+    // saveBook("../python/texts/aleph.gutenberg.org/cache/epub/1/pg1-images.epub")
 }

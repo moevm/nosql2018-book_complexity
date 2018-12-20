@@ -68,6 +68,7 @@ var get_lexicon_years = function (years) {
     return years.map(x => Math.floor(255*x/max_year));
 };
 
+// this mapreduce fail
 var years = db.runCommand(
     {
         mapReduce: "book_unique_words_with_stats",
@@ -284,9 +285,8 @@ db.runCommand(
 
 var unique_stems_count = db.book_stemmed_words.count();
 
-
 var computeDifficulty = function(words_count, unique_words_count, unique_stems_count, lexicon_years, lexicon_rarity) {
-    return unique_stems_count / words_count;
+    return Math.min(5, unique_stems_count / words_count * (5 / 0.2) );
 };
 
 id = db.books_stats.insertOne(

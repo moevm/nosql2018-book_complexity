@@ -69,6 +69,39 @@ fun main(args: Array<String>) {
                 }
             }
 
+            get("/export") {
+                val log = "mongoexport --db nosql --collection books_stats --out export.json".runCommand()
+                println(log)
+                call.respondFile(File("export.json"))
+                Files.delete(Paths.get("export.json"))
+            }
+
+            post("/import") {
+                val multipart = call.receiveMultipart()
+                multipart.forEachPart { part ->
+                    when (part) {
+                        is PartData.FileItem -> {
+                            val originalFileName = part.originalFileName!!.toLowerCase()
+                            if (originalFileName.endsWith("json")) {
+                                val path = Paths.get("import.json")
+                                Files.copy(part.streamProvider(), path)
+
+                                val log = "mongoimport --upsertFields _id --db nosql --collection books_stats --file import.json ".runCommand()
+                                println(log)
+
+                                Files.delete(path)
+
+                                call.respond(HttpStatusCode.Accepted)
+                            }
+
+                        }
+                    }
+                }
+                call.respond(HttpStatusCode.NotAcceptable)
+
+            }
+
+
             post("/BookAnalysisServlet") {
                 val param = call.receiveParameters()["id"]
 

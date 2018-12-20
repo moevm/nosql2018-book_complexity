@@ -41,6 +41,7 @@ class ServerSide private constructor() {
 
     private fun processBook(): ObjectId {
         val log = "mongo < src/main/resources/mongo.js".runCommand()
+        println(log)
         val log_splitted = log?.split("\n")
         val id_hash = log_splitted?.get(log_splitted.size - 3)?.substring(10, 34)
 
