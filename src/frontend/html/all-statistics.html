@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Books complexity online</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../css/all-stats-style.css" rel="stylesheet">
+</head>
+
+<body onload="requestTopBooks();requestTopAuth();requestAvgDifficulty()">
+
+    <div class="container">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <button class="nav-link btn btn-dark" id="bookBtn"><strong>Top difficult books</strong></button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-light" id="authBtn"><strong>Top difficult authors</strong></button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-light" id="graphBtn"><strong>Avarage difficultly per year</strong></button>
+          </li>
+        </ul>
+
+        <div class="cont center-block">
+          <div id="topBooksTableId">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Difficulty</th>
+                </tr>
+              </thead>
+              <tbody id="tBodyIdBook"></tbody>
+            </table>
+          </div>
+
+          <div id="topAuthTableId">
+              <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Difficulty</th>
+                </tr>
+              </thead>
+              <tbody id="tBodyIdAuth"></tbody>
+            </table>
+          </div>
+
+          
+          <div id="graphId" class="graphDiv"></div>
+        </div>
+        
+        
+        <a href="../index.html"><img class="arrow" src="../img/arrow.png" alt="arrow image" ></a>
+    </div>
+
+
+  <script src="../vendor/jquery/jquery.js"></script>
+  <script src="../js/allstats.js"></script>
+  <script src="../vendor/plotly-latest.min.js"></script>
+
+</body>
+</html>

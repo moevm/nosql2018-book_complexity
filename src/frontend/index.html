@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Books complexity online</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/dropzone/dropzone.css" rel="stylesheet">
+    <link href="css/drpzn-style.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main-style.css" rel="stylesheet">
+    <link href="css/modalProperties.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+  
+     	<div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-9 col-xl-8 mx-auto text-white text-center shadowed-text">
+              <h1 class="mb-5">Find the book in our database:</h1>
+          </div>
+        </div>
+        <div class="col-md-10 col-lg-9 col-xl-8 mx-auto">
+          <form method="GET" action="html/search-results.html">
+            <div class="form-row">
+              <div class="col-9">
+                <input class="form-control form-control-md" name="searchedBook" placeholder="Enter the name of the book ...">
+              </div>
+              <div class="col-3">
+                <button type="submit" class="btn btn-block btn-md btn-primary"><b>search</b></button>
+              </div>
+            </div>
+          </form>
+          <div class="form-row">
+            <div class="col-9"></div>
+            <div class="col-3" ><a href="/html/all-statistics.html" class="btn btn-md btn-link btn-block text-white shadowed-text">or show all</a></div>
+          </div>
+        </div>
+       
+        
+          
+         
+        
+        <!-- Modal -->
+        <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Fill the book info</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+              <form id="infoFormId">
+                
+                <div class="form-group">
+                  <label>Book title</label>
+                  <input type="text" class="form-control" id="inputTitle" placeholder="Input book title">
+                </div>
+                <div class="form-group">
+                  <label>Author</label>
+                  <input type="text" class="form-control" id="inputAuthor" placeholder="Input book author">
+                </div>
+                <div class="form-group">
+                  <label>Publication year</label>
+                  <input type="text" class="form-control" id="inputYear" placeholder="Input publication year">
+                </div>
+                <div class="form-group">
+                  <label>Book image (optional):</label>
+                  <input type="file" class="form-control-file" id="inputImage" accept="image/png, image/jpeg">
+                </div>
+                <div class="form-group">
+                  <label>Book file (pdf/fb2/epub):</label>
+                  <input type="file" class="form-control-file" id="inputBookFile" accept="application/pdf,application/epub+zip,.fb2,.txt">
+                </div>
+                <div class="errorSection" id="err"></div>
+                <div class="row align-items-center justify-content-center" style="margin-top:20px;">
+                  <button type="submit" class="btn btn-primary center">Submit</button>
+                </div>
+              </form>
+              
+
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+        <!-- Modal DB-->
+        <div class="modal fade" id="dbModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Import or expot database</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table>
+                  <tr>
+                    <td>
+                      <div id="drpznID" class="dropzone"></div>
+                    </td>
+                    <td>
+                      <a id ="exportID" href="#"><button data-toggle="modal" class="btn btn-primary uploadButton">
+                          Export DB
+                      </button></a>
+                    </td>
+                  </tr>
+                </table>  
+                  
+                
+  
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="uploadButtonDiv">
+          <table class="center">
+              <tr>
+                  <td>
+                      <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary text-center uploadButton">
+                        <img class="uploadIcon" src="img/upload.png"><br>
+                        Upload a new book
+                      </button>
+                  </td>
+                  <td>
+                      <button data-toggle="modal" data-target="#dbModal" data-target="html/db.html" class="btn btn-primary text-center uploadButton">
+                        <img class="uploadIcon" src="img/db.png"><br>
+                        Import/Export DB
+                      </button>
+                  </td>
+                </tr>
+          </table>
+
+      </div>
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/dropzone/dropzone.js"></script>
+    <script src="js/drpzn.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/bootstrap4/js/bootstrap.min.js"></script>
+    <script src="js/modalForm.js"></script>
+  </body>
+
+</html>
